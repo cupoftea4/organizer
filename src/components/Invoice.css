@@ -1,0 +1,10 @@
+table, td, tr {
+	border: 3px solid rgb(69, 0, 96);
+	border-collapse: collapse;
+	padding: 10px;
+}
+
+#total {
+	text-align:right;
+}
+

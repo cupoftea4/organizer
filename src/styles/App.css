@@ -1,0 +1,34 @@
+.App {
+  text-align: center;
+}
+
+*{
+	margin: 0;
+	padding: 0;
+}
+
+
+*:focus {
+    outline: 0;
+}
+
+textarea:focus, input:focus{
+    outline: 0;
+}
+
+a {
+	text-decoration: none;
+}
+
+li {
+	text-decoration: none;
+	list-style: none;
+}
+
+body {
+	font-family: 'Literata', serif;
+  font-size: 16pt;
+	background-color: rgb(250, 250, 250);
+	width: 100%;
+}
+
