@@ -1,58 +1,78 @@
-import React, { useState } from 'react'
-import InvoiceRow from './InvoiceRow'
+import React, { useState, useEffect } from 'react';
+import InvoiceRow from './InvoiceRow';
 import './Invoice.css';
+import CreateInvoiceRow from './CreateInvoiceRow';
 
-const Invoice = (props) => {
-    let total = 0
-    const [goodsList, setGoodsList] = useState([{id: 1}, {}])
-    const Create = async () => {
-        await props.setRows([...props.rows, {}])
-        console.log("123")
-        try {
-            const res = await fetch("http://my.com/", {
+
+const Invoice = ({ rows, setRows, onRowUpdate, id }) => {
+    const total = rows.reduce((acc, row) => acc + (row.price * row.quantity), 0);
+    const [groups, setGroups] = useState([{ id: 1, name: "" }]);
+    //console.log(goodsList);
+
+    const create = () => {
+        setRows([{price: 0, quantity: 0, id: 0}, ...rows]);
+        // fetch("http://my.com/", {
+        //     method: 'POST',
+        //     header: {
+        //         'Content-Type': 'application/x-www-form-urlencoded',
+        //     },
+        //     body: JSON.stringify({ task: "create-new" })
+        // }).then(res => res.json())
+        // .then(newRow => setRows([...rows, newRow]))
+        console.log(rows)
+    };
+
+    useEffect (
+        ()  =>  {
+            fetch("http://my.com/", {
                 method: 'POST',
                 header: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
-                body: JSON.stringify("create-new")
+                body: JSON.stringify({task: "get-groups"})
             })
-            let response = JSON.parse(await res.text())
-            console.log(response)
-            setGoodsList(...response)
-            console.log(goodsList)
-
-            //const searchResult = response.filter(input => response.name.includes(input))
-            //setInvoiceRows([...invoiceRows, ...response])
-        } catch (err) {
-            console.error(err)
-        }
-    }
+                .then(data => data.json())
+                .then(setGroups);
+        }, []
+    );
 
     return (
-        <div>
+        <div style={{padding: "20px"}}>
+            <CreateInvoiceRow groups={groups} onRowUpdate={onRowUpdate} invoiceId={id} />
             <table>
+            {/* <InvoiceRow id={"+"} row={{id: 0, price: "", quantity: ''}} onRowUpdate={onRowUpdate}/> */}
                 <tbody>
-                    {props.rows.map((row, index) => {
-                        (index) ? (total += row.sum) : (total = 0)
-                        return <InvoiceRow number={index} row={row} key={index} rows={props.rows} setRows={props.setRows} changes={props.changes} setChanges={props.setChanges} />
+                    <tr>
+                        <th></th>
+                        <th>Назва товару</th>
+                        <th>Ціна, грн.</th>
+                        <th>Кількість</th>
+                        <th>Сума, грн.</th>
+                        <th>Штрих-код</th>
+                        <th></th>
+                    </tr>
+                    {rows.map((row, index) => {
+                        return <InvoiceRow id={index+1} row={row} key={row.id} onRowUpdate={onRowUpdate} invoiceId={id}  />
                     })}
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th id="total" colSpan="3">Total:</th>
-                        <td>
-                            <input list="browsers" name="browser" id="browser" />
-                            <datalist>          
-                                {goodsList.map((item, index) => {return <option value={item} key={index}/>})}
+                        <th id="total" colSpan="4">Total:</th>
+                        <td>{total}</td>
+                    </tr>
+                    <tr>
+                        {/* <td>
+                            <input list="items" />
+                            <datalist id="items" >
+                                {goods.map((item) => <option value={item.name + " " + item.code} key={item.id_tovar} />)}
                             </datalist>
-                        </td>
-                        <td>{total.toString()}</td>
-                        <td><button onClick={Create}>Додати товар</button></td>
+                        </td> */}
                     </tr>
                 </tfoot>
             </table>
+            <button onClick={create}>Додати товар</button>
         </div>
     )
 }
 
-export default Invoice
+export default Invoice;

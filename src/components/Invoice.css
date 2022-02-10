@@ -1,10 +1,212 @@
+* {
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+}
+html {
+	--scrollbarBG: #CFD8DC;
+	--thumbBG: #04AA6D;
+}
+body {
+	scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+}
+
+body::-webkit-scrollbar {
+	width: 15px;
+}
+
+body::-webkit-scrollbar-track {
+	background: var(--scrollbarBG);
+}
+body::-webkit-scrollbar-thumb {
+	background-color: var(--thumbBG) ;
+	border-radius: 10px;
+}
+
 table, td, tr {
-	border: 3px solid rgb(69, 0, 96);
+	font-family: Arial, Helvetica, sans-serif;
 	border-collapse: collapse;
+	border: 1px solid #ddd;
 	padding: 10px;
+	/* margin: 15px; */
+
+}
+  
+#invoice-table tr:nth-child(even){background-color: #f2f2f2;}
+  
+table tr:hover {
+	background-color: #04cf85;
+	color: white;
+}
+
+.selected-row {
+	background-color: #04cf85;
+	color: white;
+}
+  
+table th {
+	padding-top: 12px;
+	padding-bottom: 12px;	
+	background-color: #04AA6D;
+	color: white;
+}
+
+#tables {
+	display: flex;
+	justify-content: start;  
+}
+
+#invice-list tbody {
+	display: block;
+	width: 20%;
+	height: 800px;
+	overflow-y: scroll;
+}
+/* #invice-list td, tr {
+	display: table;
+} */
+
+input {
+	border: none;
+	background-color: rgb(250, 250, 250, 0);
+	width: 100px;
+	display: flex;
+	text-align: right;
+
+}
+
+
+button {
+	border: none;
+	padding:  10px 20px 10px 20px;
+	margin: 10px 30px 0 0px;
+	background-color: rgb(255, 255, 255);
+	border-radius: 10px;
 }
 
 #total {
 	text-align:right;
+}
+
+.dropdown {
+	max-height: 400px;
+	max-width: 900px;
+	overflow-y: auto;
+	scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+	overflow-x: hidden;
+	font-size: 13pt;
+	border-radius: 5px;
+	background-color: rgb(240, 240, 240);
+	margin-right: -600px;
+}
+
+.dropdown::-webkit-scrollbar {
+	width: 15px;
+}
+  
+.dropdown::-webkit-scrollbar-track {
+	background: var(--scrollbarBG);
+}
+.dropdown::-webkit-scrollbar-thumb {
+	background-color: var(--thumbBG) ;
+	border-radius: 5px;
+}
+
+.dropdownItem {
+	padding: 10px;
+	max-width: 900px;
+	white-space: nowrap;
+	text-align: left;
+}
+
+.dropdownItem:hover{
+	background-color: rgb(199, 199, 199);
+}
+
+.confirm-container {
+	padding: 20px;
+	background-color: rgb(214, 214, 214);
+	border-radius: 10px;
+	border: 1px solid rgb(54, 54, 54);
+	display: flex;
+    position: fixed;
+	align-items: center;
+	justify-content: center;
+    left: 50%;
+    top: 50%;
+    z-index: 100;
+
+    height: 150px;
+    margin-top: -100px;
+
+    width: 500px;
+    margin-left: -300px;
+}
+
+.agree-button:hover {
+	background-color: rgb(252, 111, 111);
+}
+
+.disagree-button:hover {
+	background-color: #04AA6D;
+}
+
+.create-row {
+	display: block;
+	/* display: inline-block; */
+	/* justify-content: left; */
+	/* white-space: nowrap; */
+	/* padding: 20px; */
+	max-width: 800px;
+	width: 800px; 
+	height: 30px;
+	padding: 10px ;
+}
+
+.create-row-input {
+	 /* display: inline-block; */
+
+	float: left;
+	/* position:unset; */
+	/* display: inline; */
+	/* justify-self: unset; */
+	background-color: #fff;
+	border: 2px solid #04AA6D;
+	border-radius: 5px;
+	height: 30px;
+	margin: 5px;
+	/* padding: 5px; */
+	/* margin: 10px; */
+	/* padding: 5px;
+	margin: 10px 10px 0px 0px;
+	width: 50px;
+	max-width: 280px;
+	max-height: 15px;
+	text-align: left;*/
+} 
+
+.inputs-div {
+	/* padding: 6px; */
+	float: left;
+	margin: 5px 0 5px 5px;
+	text-align: left;
+
+}
+
+
+.name-input {
+	text-align: left;
+	width: 400px;
+	max-width: 400px;
+}
+
+#datalist-div {
+	/* display: inline-block; */
+	float: left;
+ 	max-width: 500px;
+	width: 250px;
+	margin: 5px 5px 5px 0;
+	/* padding: 6px; */
+
 }
 
