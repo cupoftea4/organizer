@@ -2,7 +2,6 @@ import React, { useState, useEffect, useMemo } from 'react';
 import DataListInput from "react-datalist-input";
 import UseAnimations from 'react-useanimations';
 import trash from 'react-useanimations/lib/trash';
-import plusToX from 'react-useanimations/lib/plusToX';
 import { confirm } from "react-confirm-box";
 import './Invoice.css';
 
@@ -12,8 +11,6 @@ const InvoiceRow = ({ row, id = 0, onRowUpdate, invoiceId }) => {
     const [name, setName] = useState(row.name);
     const [barcode, setBarcode] = useState(row.barcode);
     const [goods, setGoods] = useState([]);
-    // const [editing, setEditing] = useState(false);
-    // let animation = useMemo(() => editing ? plusToX : trash, [editing] );
     const sum = price * quantity;
 
     useEffect(() => {
@@ -22,12 +19,6 @@ const InvoiceRow = ({ row, id = 0, onRowUpdate, invoiceId }) => {
         setQuantity(row.quantity);
         setBarcode(row.barcode);
     }, [row]);
-
-    // useEffect(() => {
-    //     console.log("State changed at row ", row.id, "to", editing);
-    //     // if(editing)
-    //         // trash = plusToX;
-    // }, [editing]);
 
     const match = (currentInput, item) => item;
     const deleteRow = async () => {
@@ -73,7 +64,6 @@ const InvoiceRow = ({ row, id = 0, onRowUpdate, invoiceId }) => {
         })
             .then(res => res.json())
             .then(setGoods)
-        // console.log(goods);
     }
 
     const items = useMemo(
@@ -98,19 +88,12 @@ const InvoiceRow = ({ row, id = 0, onRowUpdate, invoiceId }) => {
                     value={name}
                     items={items}
                     onSelect={product => {
-                        // console.log({ key: "name", property: product.name, barcode: product.code });
                         setName(product.name);
                         updateInvoice({ key: "name", property: product.name, id_tovar: product.id_tovar });
                     }}
                     onInput={value => {
-                        // console.log(value);
                         setName(value);
-                        // if (!editing) {
-                        //     setEditing(true);
-                        // }
-                        // setGoods([{name: value, id_tovar: 0}]);
                         handleSearch("name", value);
-                        // console.log("EDITING", editing);
                     }}
                     match={match}
                     dropdownClassName="dropdown"

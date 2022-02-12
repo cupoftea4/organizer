@@ -11,6 +11,9 @@ const Tables = () => {
     const [selectedDate, setSelectedDate] = useState({ year: [], month: []});
     const [dates, setDates] = useState({ years: [], months: []});
     
+    useEffect(() => {
+        getUptoDateInvoices()
+    }, []);
 
     const fetchData = (changes = {}) => {
         return fetch("http://my.com/", {
@@ -21,33 +24,35 @@ const Tables = () => {
             body: JSON.stringify(changes)
         }).then(res => {
             let r;
-            console.log(r = res.json())
+            console.log(r = res.json(), changes)
             return r
         });
     }
 
-    useEffect(() => {
+
+    const getUptoDateInvoices = () => {
         fetchData({ task: "get-dates" })
-            .then(dates => {
-                setDates(dates);
-                setSelectedDate({ month: dates.months[0], year: dates.years[0]});
-                fetchData({
-                    task: "get-invoices",
-                    date: (dates.months[0] + "-" + dates.years[0])
-                })
-                    .then(setInvoices)
+        .then(dates => {
+            setDates(dates);
+            setSelectedDate({ month: dates.months[0], year: dates.years[0]});
+            fetchData({
+                task: "get-invoices",
+                date: (dates.months[0] + "-" + dates.years[0])
             })
-    }, []);
+                .then(setInvoices)
+        })
+    }
 
 
     const handleRowUpdate = (changes) => {
-        console.log({...changes, id_nakladni: selectedInvoiceId})
         fetchData({...changes, id_nakladni: selectedInvoiceId}).then(setInvoiceRows);
     };
 
+    const handleInvoicesUpdate = (changes) => {
+        fetchData({...changes, selectedDate: selectedDate.month + "-" + selectedDate.year}).then(setInvoices);
+    }
+
     const onYearChange = year => {
-        console.log("YEAR CHANGE: ", year);
-        setSelectedDate({month: 1, year: 2020});
         fetchData({ task: "get-months", year})
             .then(months => {
                 setDates({...dates, months}); 
@@ -56,7 +61,6 @@ const Tables = () => {
     }
 
     const onMonthChange = (month, year) => {
-        console.log("MONTH CHANGE: ", month, selectedDate.year, { ...selectedDate, year});
         setSelectedDate({ month, year })
         fetchData({
             task: "get-invoices",
@@ -71,8 +75,8 @@ const Tables = () => {
                 <SelectDate dates={dates} onYearChange={onYearChange} selectedDate={selectedDate} onMonthChange={onMonthChange}/>
             </div>
             <div id="tables">
-                <InvoicesList invoices={invoices} onRowUpdate={handleRowUpdate} selectedInvoiceId={selectedInvoiceId} setSelectedInvoiceId={setSelectedInvoiceId} />
-                <Invoice rows={invoiceRows} setRows={setInvoiceRows} onRowUpdate={handleRowUpdate} id={selectedInvoiceId} />
+                <InvoicesList invoices={invoices} updateInvoices={handleInvoicesUpdate} onRowUpdate={handleRowUpdate} selectedInvoiceId={selectedInvoiceId} setSelectedInvoiceId={setSelectedInvoiceId} />
+                <Invoice rows={invoiceRows} onRowUpdate={handleRowUpdate} id={selectedInvoiceId} />
             </div>
         </div>
     )

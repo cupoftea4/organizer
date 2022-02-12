@@ -77,7 +77,6 @@ const CreateInvoiceRow = ({groups, onRowUpdate, invoiceId}) => {
  
     const items = useMemo(
         () => {
-        // console.log(goods);
             return goods.map((product) => ({
                 label: product.name + " - " + ((product?.id_tovar) ? (product.price + "грн." + " | " + product.code) : ""),
                 key: product.id_tovar,
@@ -127,15 +126,12 @@ const CreateInvoiceRow = ({groups, onRowUpdate, invoiceId}) => {
                     value={newProduct.name}
                     items={items}
                     onSelect={product => {
-                        // console.log({ key: "name", property: product.name, barcode: product.code });
                         setNewProduct(product);
                         setQuantityFocus();
                     }}
                     onInput={value => {
-                        // console.log(value);
                         setNewProduct({...newProduct, name: value});
                         handleSearch("name", value);
-                        // console.log("EDITING", editing);
                     }}
                     match={match}
                     dropdownClassName="dropdown"

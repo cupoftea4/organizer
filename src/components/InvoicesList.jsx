@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import CreateInvoice from './CreateInvoice';
 import InvoicesListRow from './InvoicesListRow';
 
-const InvoicesList = ({ invoices, onRowUpdate, selectedInvoiceId, setSelectedInvoiceId }) => {
+const InvoicesList = ({ invoices, updateInvoices, onRowUpdate, selectedInvoiceId, setSelectedInvoiceId }) => {
     const [isMounted, setIsMounted] = useState(false)
 
     useEffect(() => {
@@ -10,11 +10,14 @@ const InvoicesList = ({ invoices, onRowUpdate, selectedInvoiceId, setSelectedInv
             setSelectedInvoiceId(invoices[0].id);
             onRowUpdate({ task: "get-table", id: invoices[0].id })
         } else setIsMounted(true);
+        if(invoices.length == 0) {
+
+        }
     }, [invoices]);
 
     return (
         <div id="invoce-list">
-            <CreateInvoice />
+            <CreateInvoice updateInvoices={updateInvoices} />
             <table>
                 <thead>
                     <tr>
@@ -22,6 +25,7 @@ const InvoicesList = ({ invoices, onRowUpdate, selectedInvoiceId, setSelectedInv
                         <th>Дата</th>
                         <th>Точка</th>
                         <th>Примітка</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -29,6 +33,7 @@ const InvoicesList = ({ invoices, onRowUpdate, selectedInvoiceId, setSelectedInv
                         invoice={invoice}
                         key={invoice.id}
                         updateInvoice={onRowUpdate}
+                        updateInvoices={updateInvoices}
                         selectedRowId={selectedInvoiceId}
                         setSelectedRowId={setSelectedInvoiceId} 
                     />)}
