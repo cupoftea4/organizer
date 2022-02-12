@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import InvoiceRow from './InvoiceRow';
-import './Invoice.css';
 import CreateInvoiceRow from './CreateInvoiceRow';
 
 

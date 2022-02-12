@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Invoice from './Invoice';
 import InvoicesList from './InvoicesList';
 import SelectDate from './SelectDate';
+import './styles/Invoice.css';
 
 const Tables = () => {
     const [invoiceRows, setInvoiceRows] = useState([]);
@@ -12,7 +13,8 @@ const Tables = () => {
     const [dates, setDates] = useState({ years: [], months: []});
     
     useEffect(() => {
-        getUptoDateInvoices()
+        getUptoDateInvoices();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const fetchData = (changes = {}) => {

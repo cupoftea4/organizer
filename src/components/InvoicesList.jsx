@@ -7,12 +7,13 @@ const InvoicesList = ({ invoices, updateInvoices, onRowUpdate, selectedInvoiceId
 
     useEffect(() => {
         if(isMounted) {
-            setSelectedInvoiceId(invoices[0].id);
-            onRowUpdate({ task: "get-table", id: invoices[0].id })
+            setSelectedInvoiceId(invoices[0]?.id);
+            onRowUpdate({ task: "get-table", id: invoices[0]?.id })
         } else setIsMounted(true);
-        if(invoices.length == 0) {
+        // if(invoices.length == 0) {
 
-        }
+        // }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [invoices]);
 
     return (

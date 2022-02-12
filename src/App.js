@@ -5,9 +5,12 @@ import './styles/App.css';
 /****************************************
 TODO: 
   -css
-  -delete github component
+  -remove github component
+  -safe creation of invice row
+  -fix price on invoice row product name edit
   -fix deleting the last invoice in list
   -fix error on focus change
+  -fix search datalist
   -add PDF print 
   -add login
   -build an API?

@@ -12,6 +12,7 @@ const InvoicesListRow = ({ invoice, updateInvoice, updateInvoices, selectedRowId
         setNote(invoice.note);
     }, [invoice.note]);
 
+    const updateNote = () => updateInvoices({ task: "update-invoice-list", id: invoice.id, note });
     const deleteRow = async () => {
         const result = await confirm("Ви впевнені, що хочете видалити цю накладну", options);
         if (result) {
@@ -48,7 +49,8 @@ const InvoicesListRow = ({ invoice, updateInvoice, updateInvoices, selectedRowId
             <td><input type="text" 
                 value={note ?? ""}
                 onChange={e => setNote(e.target.value)}
-                onBlur={() => updateInvoices({ task: "update-invoice-list", id: invoice.id, note })}
+                onBlur={updateNote}
+                onKeyDown={e => {if(e.key === 'Enter') updateNote()} }
             /></td>
             <td>
                 <UseAnimations
