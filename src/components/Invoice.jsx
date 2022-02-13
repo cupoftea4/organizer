@@ -21,8 +21,19 @@ const Invoice = ({ rows, onRowUpdate, id }) => {
         }, []
     );
 
+    const printInvoice = () => {
+        fetch("http://my.com/print.php", {
+            method: 'POST',
+            header: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: JSON.stringify({id})
+        })
+    }
+
     return (
-        <div style={{padding: "20px"}}>
+        <div className="table-div invoice">
+            <h2>Накладна №{id}</h2>
             <CreateInvoiceRow groups={groups} onRowUpdate={onRowUpdate} invoiceId={id} />
             <table>
                 <tbody>
@@ -41,8 +52,11 @@ const Invoice = ({ rows, onRowUpdate, id }) => {
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th id="total" colSpan="4">Total:</th>
-                        <td>{total}</td>
+                        <th id="total" colSpan="4">Разом: </th>
+                        <td><b>{total}</b></td>
+                        <td colSpan="2">
+                            <button onClick={printInvoice} className="print-btn" >Друкувати</button>
+                        </td>
                     </tr>
                 </tfoot>
             </table>

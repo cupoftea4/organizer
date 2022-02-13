@@ -59,6 +59,7 @@ const InvoiceRow = ({ row, id = 0, onRowUpdate, invoiceId }) => {
                         updateInvoice({ key: "name", property: product.name, id_tovar: product.id_tovar });
                     }} 
                     onInput={ value => setName(value)}
+                    inputClassName="name-input"
                 />
             </td>
             <td><input
@@ -80,6 +81,7 @@ const InvoiceRow = ({ row, id = 0, onRowUpdate, invoiceId }) => {
                 <UseAnimations
                     animation={trash}
                     onClick={deleteRow}
+                    className="anim-btn"
                 />
             </td>
         </tr>

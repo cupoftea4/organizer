@@ -2,6 +2,7 @@
 	margin: 0;
 	padding: 0;
 	text-decoration: none;
+	font-family: Arial, Helvetica, sans-serif;
 }
 html {
 	--scrollbarBG: #CFD8DC;
@@ -34,7 +35,7 @@ table, td, tr {
   
 #invoice-table tr:nth-child(even){background-color: #f2f2f2;}
   
-table tr:hover {
+table tbody tr:hover {
 	background-color: #04cf85;
 	color: white;
 }
@@ -42,7 +43,7 @@ table tr:hover {
 .selected-row {
 	background-color: #04cf85;
 	color: white;
-}
+} 
   
 table th {
 	padding-top: 12px;
@@ -56,15 +57,16 @@ table th {
 	justify-content: start;  
 }
 
-#invice-list tbody {
-	display: block;
-	width: 20%;
-	height: 800px;
-	overflow-y: scroll;
+
+.table-div {
+	padding: 20px;
 }
-/* #invice-list td, tr {
-	display: table;
-} */
+
+.table-div.invoice {
+	position: relative;
+	top: -100px;
+	/* margin: 50px; */
+}
 
 table input {
 	border: none;
@@ -72,6 +74,8 @@ table input {
 	width: 100px;
 	display: flex;
 	text-align: right;
+	font-size: 14pt;
+	
 }
 
 
@@ -85,6 +89,7 @@ button {
 
 #total {
 	text-align:right;
+	padding: 0 10px;
 }
 
 .dropdown {
@@ -152,38 +157,51 @@ button {
 
 .create-row {
 	display: block;
-	/* display: inline-block; */
-	/* justify-content: left; */
-	/* white-space: nowrap; */
-	/* padding: 20px; */
 	max-width: 800px;
-	width: 800px; 
-	height: 30px;
-	padding: 10px ;
+	width: 750px; 
+	height: 50px;
+	padding: 5px;
+	margin: 10px;
+	background-color: #23ce8f;
+	border-radius: 20px;
 }
 
-.create-row-input {
-	 /* display: inline-block; */
+.create-row.create-invoice {
+	width: 430px;
+	/* height: 90px; */
+}
 
+.choose-input {
 	float: left;
-	/* position:unset; */
-	/* display: inline; */
-	/* justify-self: unset; */
 	background-color: #fff;
-	border: 2px solid #04AA6D;
+	border: 3px solid #04AA6D;
 	border-radius: 5px;
 	height: 30px;
 	margin: 5px;
 	width: 100px;
 	padding: 0 5px 0 5px;
-	/* margin: 10px; */
-	/* padding: 5px;
-	margin: 10px 10px 0px 0px;
-	width: 50px;
-	max-width: 280px;
-	max-height: 15px;
-	text-align: left;*/
 } 
+
+.choose-input.select {
+	height: 30px;
+}
+
+.choose-input.num {
+	width: 55px;
+	margin-left: 20px;
+}
+
+.choose-input.date {
+	width: 120px;
+}
+
+.choose-input.note {
+	width: 110px;
+}
+
+.choose-input.shop {
+	width: 90px;
+}
 
 .inputs-div {
 	/* padding: 6px; */
@@ -198,6 +216,7 @@ button {
 	text-align: left;
 	width: 400px;
 	max-width: 400px;
+
 }
 
 #datalist-div {
@@ -211,3 +230,35 @@ button {
 
 }
 
+.select-date-div {
+	display: flex;
+	justify-content: center;
+	width: 400px;
+	margin: 30px 0 0 30px;
+}
+
+.date-div {
+
+	width: 50px;
+	color: #fff;
+	width: fit-content;
+	height: 40px;
+	padding: 10px;
+	border-radius: 10px;
+	background-color: #06c27d;
+
+}
+
+.anim-btn:hover {
+	cursor: pointer;
+}
+
+.print-btn {
+	background-color: #04AA6D;
+	color: #fff;
+}
+
+.print-btn:hover {
+	cursor: pointer;
+	background-color: #06c27d;
+}

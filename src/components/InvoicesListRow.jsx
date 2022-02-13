@@ -4,7 +4,7 @@ import trash from 'react-useanimations/lib/trash';
 import { confirm } from "react-confirm-box";
 
 
-const InvoicesListRow = ({ invoice, updateInvoice, updateInvoices, selectedRowId, setSelectedRowId }) => {
+const InvoicesListRow = ({ invoice, shops, updateInvoice, updateInvoices, selectedRowId, setSelectedRowId }) => {
     // console.log(invoice);
     const [ note, setNote ] = useState(invoice.note);
 
@@ -43,9 +43,9 @@ const InvoicesListRow = ({ invoice, updateInvoice, updateInvoices, selectedRowId
             }}
             className={invoice.id === selectedRowId ? "selected-row" : ""}
         >
-            <td>{invoice.id}</td>
+            <td><b>{invoice.id}</b></td>
             <td>{invoice.date}</td>
-            <td>{invoice.tochka}</td>
+            <td>{shops.find(shop => shop.id === invoice.tochka).name}</td>
             <td><input type="text" 
                 value={note ?? ""}
                 onChange={e => setNote(e.target.value)}

@@ -3,7 +3,22 @@ import CreateInvoice from './CreateInvoice';
 import InvoicesListRow from './InvoicesListRow';
 
 const InvoicesList = ({ invoices, updateInvoices, onRowUpdate, selectedInvoiceId, setSelectedInvoiceId }) => {
-    const [isMounted, setIsMounted] = useState(false)
+    const [ shops, setShops ] = useState([{ id: 0, name: "" }]);
+    const [isMounted, setIsMounted] = useState(false);
+
+    const fetchData = (changes = {}) => {
+        return fetch("http://my.com/", {
+            method: 'POST',
+            header: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: JSON.stringify(changes)
+        }).then(res => res.json());
+    }
+
+    useEffect(() => {
+        fetchData({task: "get-shops"}).then(setShops);
+    }, []);
 
     useEffect(() => {
         if(isMounted) {
@@ -17,8 +32,8 @@ const InvoicesList = ({ invoices, updateInvoices, onRowUpdate, selectedInvoiceId
     }, [invoices]);
 
     return (
-        <div id="invoce-list">
-            <CreateInvoice updateInvoices={updateInvoices} />
+        <div className="table-div">
+            <CreateInvoice updateInvoices={updateInvoices} shops={shops} />
             <table>
                 <thead>
                     <tr>
@@ -33,6 +48,7 @@ const InvoicesList = ({ invoices, updateInvoices, onRowUpdate, selectedInvoiceId
                     {invoices.map(invoice => <InvoicesListRow
                         invoice={invoice}
                         key={invoice.id}
+                        shops={shops}
                         updateInvoice={onRowUpdate}
                         updateInvoices={updateInvoices}
                         selectedRowId={selectedInvoiceId}

@@ -53,7 +53,7 @@ const CreateInvoiceRow = ({ groups, onRowUpdate, invoiceId }) => {
 
     const options = {
         render: (message, onConfirm, onCancel) => {
-            return (
+            return ( 
                 <div className="confirm-container">
                     <div>
                         <p> {message} <b>{newProduct.name}</b> {"?"} </p>
@@ -67,11 +67,11 @@ const CreateInvoiceRow = ({ groups, onRowUpdate, invoiceId }) => {
 
     return <div className="create-row" >
         <div className="inputs-div">
-            <select className="create-row-input" onChange={e => setNewProduct({ ...newProduct, group: e.target.value })}>
+            <select className="choose-input select" onChange={e => setNewProduct({ ...newProduct, group: e.target.value })}>
                 {groups.map(group => <option value={group.id} key={group.id}>{group.name}</option>)}
             </select>
             <input
-                className="create-row-input"
+                className="choose-input"
                 type="text"
                 value={newProduct.barcode}
                 onChange={event => setNewProduct({ ...newProduct, barcode: event.target.value })}
@@ -95,19 +95,19 @@ const CreateInvoiceRow = ({ groups, onRowUpdate, invoiceId }) => {
                     setQuantityFocus();
                 }}
                 onInput={value => setNewProduct({ ...newProduct, name: value })}
-                inputClassName="create-row-input"
+                inputClassName="choose-input datalist"
             />
         </div>
         <div className="inputs-div">
             <input
-                className="create-row-input"
+                className="choose-input num"
                 type="text"
                 value={newProduct.price}
                 onChange={event => setNewProduct({ ...newProduct, price: event.target.value })}
                 placeholder="Ціна"
             />
             <input
-                className="create-row-input"
+                className="choose-input num"
                 type="text"
                 value={newProduct.quantity}
                 onChange={event => setNewProduct({ ...newProduct, quantity: event.target.value })}
@@ -115,7 +115,7 @@ const CreateInvoiceRow = ({ groups, onRowUpdate, invoiceId }) => {
                     if (e.key === 'Enter') {
                         setQuantityFocus();
                         confirmCreateProduct(newProduct);
-                        console.log(newProduct);
+                        // console.log(newProduct);
                     }
                 }}
                 ref={quantityFocus}
@@ -125,7 +125,10 @@ const CreateInvoiceRow = ({ groups, onRowUpdate, invoiceId }) => {
             <UseAnimations
                 animation={download}
                 size={40}
+                strokeColor="white"
+                fillColor="white"
                 onClick={() => confirmCreateProduct(newProduct)}
+                className="anim-btn"
             />
         </div>
     </div>;

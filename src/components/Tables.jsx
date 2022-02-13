@@ -51,7 +51,11 @@ const Tables = () => {
     };
 
     const handleInvoicesUpdate = (changes) => {
-        fetchData({...changes, selectedDate: selectedDate.month + "-" + selectedDate.year}).then(setInvoices);
+        const month = changes.date.substr(5, 2);
+        const getDate = (changes.task === "create-invoice")
+            ? (!month[0] ? month : month[1]) + "-" + changes.date.substr(0, 4)
+            : selectedDate.month + "-" + selectedDate.year;
+        fetchData({...changes, getDate }).then(setInvoices);
     }
 
     const onYearChange = year => {
@@ -73,7 +77,7 @@ const Tables = () => {
 
     return (
         <div>
-            <div>
+            <div className="select-date-div">
                 <SelectDate dates={dates} onYearChange={onYearChange} selectedDate={selectedDate} onMonthChange={onMonthChange}/>
             </div>
             <div id="tables">
