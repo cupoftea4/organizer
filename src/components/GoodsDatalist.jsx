@@ -1,20 +1,25 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo, useRef } from 'react';
 import DataListInput from "./DatalistLib/DataListInput";
 
 const GoodsDatalist = ({ id = 0, value, onInput, onSelect, fetchData, inputClassName, group = 1 }) => {
     const [goods, setGoods] = useState([]);
+    const [isMounted, setIsMounted] = useState(false);
+
 
     const match = (currentInput, item) => item;
     const handleSearch = (val) => { if (val.length >= 3) searchGoods(val) }
 
     useEffect(
-        () => handleSearch("name", value), // eslint-disable-next-line react-hooks/exhaustive-deps
-        [group]
+        () => {
+            if (isMounted) {
+                handleSearch(value);
+            } else setIsMounted(true);
+        }, // eslint-disable-next-line react-hooks/exhaustive-deps
+        []
     );
 
     const searchGoods = (property) => {
-        fetchData({ task: "find-goods", property, group })
-            .then(setGoods)
+            fetchData({ task: "find-goods", property, group }).then(setGoods);            
     }
 
     const items = useMemo(

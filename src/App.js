@@ -12,6 +12,7 @@ TODO:
   -fix deleting the last invoice in list
   -fix error on focus change
   -fix search datalist
+  -fix isMounted
   -add PDF print 
   -add login
   -build an API?

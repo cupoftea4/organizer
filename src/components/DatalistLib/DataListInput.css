@@ -43,7 +43,7 @@
 
 .datalist-input .datalist-active-item-default {
   background-color: DodgerBlue;
-  color: #ffffff;
+  /* color: #ffffff; */
   border-bottom: 1px solid #d4d4d4;
   padding: 10px;
 }

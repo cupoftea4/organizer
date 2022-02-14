@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import UseAnimations from 'react-useanimations';
 import trash from 'react-useanimations/lib/trash';
 import { confirm } from "react-confirm-box";
@@ -9,7 +9,7 @@ const InvoiceRow = ({ row, id = 0, fetchData, onRowUpdate, invoiceId }) => {
     const [price, setPrice] = useState(row.price);
     const [barcode, setBarcode] = useState(row.barcode);
     const [name, setName] = useState(row.name);
-    const sum = price * quantity;
+    let sum = useMemo(() => (price * quantity).toLocaleString("en",{useGrouping: false,minimumFractionDigits: 2}), [price, quantity]);
 
     useEffect(() => {
         setName(row.name);

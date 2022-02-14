@@ -37,7 +37,7 @@ table, td, tr {
   
 table tbody tr:hover {
 	background-color: #04cf85;
-	color: white;
+	/* color: white; */
 }
 
 .selected-row {
