@@ -7,11 +7,9 @@ const CreateInvoice = ({ shops, updateInvoices }) => {
     const [ newInvoice, setNewInvoice ] = useState({ date: curDate.current, shop: 1, note: "" });
 
     const createInvoice = async () => {
-        // console.log({ task: 'create-invoice', ...newInvoice });
         updateInvoices({ task: 'create-invoice', ...newInvoice });
     };
     
-
   return (
     <div className="create-row create-invoice" >
         <select 
