@@ -2,12 +2,12 @@ import React, { useRef, useState } from 'react';
 import UseAnimations from 'react-useanimations';
 import download from 'react-useanimations/lib/download';
 
-const CreateInvoice = ({ updateInvoices, shops }) => {
+const CreateInvoice = ({ shops, updateInvoices }) => {
     const curDate = useRef(new Date().toJSON().slice(0,10));
     const [ newInvoice, setNewInvoice ] = useState({ date: curDate.current, shop: 1, note: "" });
 
     const createInvoice = async () => {
-        console.log({ task: 'create-invoice', ...newInvoice });
+        // console.log({ task: 'create-invoice', ...newInvoice });
         updateInvoices({ task: 'create-invoice', ...newInvoice });
     };
     

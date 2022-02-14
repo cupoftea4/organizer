@@ -2,19 +2,9 @@ import React, { useState, useEffect } from 'react';
 import CreateInvoice from './CreateInvoice';
 import InvoicesListRow from './InvoicesListRow';
 
-const InvoicesList = ({ invoices, updateInvoices, onRowUpdate, selectedInvoiceId, setSelectedInvoiceId }) => {
+const InvoicesList = ({ invoices, fetchData, updateInvoices, onRowUpdate, selectedInvoiceId, setSelectedInvoiceId }) => {
     const [ shops, setShops ] = useState([{ id: 0, name: "" }]);
     const [isMounted, setIsMounted] = useState(false);
-
-    const fetchData = (changes = {}) => {
-        return fetch("http://my.com/", {
-            method: 'POST',
-            header: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: JSON.stringify(changes)
-        }).then(res => res.json());
-    }
 
     useEffect(() => {
         fetchData({task: "get-shops"}).then(setShops);
@@ -33,7 +23,7 @@ const InvoicesList = ({ invoices, updateInvoices, onRowUpdate, selectedInvoiceId
 
     return (
         <div className="table-div">
-            <CreateInvoice updateInvoices={updateInvoices} shops={shops} />
+            <CreateInvoice shops={shops} updateInvoices={updateInvoices}  />
             <table>
                 <thead>
                     <tr>

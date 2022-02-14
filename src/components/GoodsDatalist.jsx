@@ -1,26 +1,19 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import DataListInput from "react-datalist-input";
+import DataListInput from "./DatalistLib/DataListInput";
 
-const GoodsDatalist = ({ id = 0, value, onInput, onSelect, inputClassName, group = 1 }) => {
+const GoodsDatalist = ({ id = 0, value, onInput, onSelect, fetchData, inputClassName, group = 1 }) => {
     const [goods, setGoods] = useState([]);
 
     const match = (currentInput, item) => item;
     const handleSearch = (val) => { if (val.length >= 3) searchGoods(val) }
 
-    useEffect (
+    useEffect(
         () => handleSearch("name", value), // eslint-disable-next-line react-hooks/exhaustive-deps
         [group]
-    ); 
+    );
 
     const searchGoods = (property) => {
-        fetch("http://my.com/", {
-            method: 'POST',
-            header: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: JSON.stringify({ task: "find-goods", property, group })
-        })
-            .then(res => res.json())
+        fetchData({ task: "find-goods", property, group })
             .then(setGoods)
     }
 
@@ -37,7 +30,7 @@ const GoodsDatalist = ({ id = 0, value, onInput, onSelect, inputClassName, group
         [goods]
     );
 
-    return <DataListInput
+    return (<DataListInput
         id={"datalist" + id}
         value={value}
         items={items}
@@ -51,7 +44,8 @@ const GoodsDatalist = ({ id = 0, value, onInput, onSelect, inputClassName, group
         itemClassName="dropdownItem"
         inputClassName={inputClassName}
         placeholder="Назва товару"
-    />;
+        title={value}
+    />);
 };
 
 export default GoodsDatalist;

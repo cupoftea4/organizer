@@ -59,19 +59,20 @@ table th {
 
 
 .table-div {
-	padding: 20px;
+	padding: 0 20px;
 }
 
 .table-div.invoice {
 	position: relative;
 	top: -100px;
+	padding: 20px;
 	/* margin: 50px; */
 }
 
 table input {
 	border: none;
 	background-color: rgb(250, 250, 250, 0);
-	width: 100px;
+	width: 70px;
 	display: flex;
 	text-align: right;
 	font-size: 14pt;
@@ -214,8 +215,8 @@ button {
 
 .name-input {
 	text-align: left;
-	width: 400px;
-	max-width: 400px;
+	width: 500px;
+	max-width: 500px;
 
 }
 

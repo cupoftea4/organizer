@@ -34,15 +34,15 @@ const Tables = () => {
 
     const getUptoDateInvoices = () => {
         fetchData({ task: "get-dates" })
-        .then(dates => {
-            setDates(dates);
-            setSelectedDate({ month: dates.months[0], year: dates.years[0]});
-            fetchData({
-                task: "get-invoices",
-                date: (dates.months[0] + "-" + dates.years[0])
+            .then(dates => {
+                setDates(dates);
+                setSelectedDate({ month: dates.months[0], year: dates.years[0]});
+                fetchData({
+                    task: "get-invoices",
+                    date: (dates.months[0] + "-" + dates.years[0])
+                })
+                    .then(setInvoices)
             })
-                .then(setInvoices)
-        })
     }
 
 
@@ -51,8 +51,8 @@ const Tables = () => {
     };
 
     const handleInvoicesUpdate = (changes) => {
-        const month = changes.date.substr(5, 2);
-        const getDate = (changes.task === "create-invoice")
+        const month = changes.date?.substr(5, 2) ?? null;
+        const getDate = (changes.task === "create-invoice" && month)
             ? (!month[0] ? month : month[1]) + "-" + changes.date.substr(0, 4)
             : selectedDate.month + "-" + selectedDate.year;
         fetchData({...changes, getDate }).then(setInvoices);
@@ -81,8 +81,8 @@ const Tables = () => {
                 <SelectDate dates={dates} onYearChange={onYearChange} selectedDate={selectedDate} onMonthChange={onMonthChange}/>
             </div>
             <div id="tables">
-                <InvoicesList invoices={invoices} updateInvoices={handleInvoicesUpdate} onRowUpdate={handleRowUpdate} selectedInvoiceId={selectedInvoiceId} setSelectedInvoiceId={setSelectedInvoiceId} />
-                <Invoice rows={invoiceRows} onRowUpdate={handleRowUpdate} id={selectedInvoiceId} />
+                <InvoicesList invoices={invoices} fetchData={fetchData} updateInvoices={handleInvoicesUpdate} onRowUpdate={handleRowUpdate} selectedInvoiceId={selectedInvoiceId} setSelectedInvoiceId={setSelectedInvoiceId} />
+                <Invoice rows={invoiceRows} fetchData={fetchData} onRowUpdate={handleRowUpdate} id={selectedInvoiceId} />
             </div>
         </div>
     )

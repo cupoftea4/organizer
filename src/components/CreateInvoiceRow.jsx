@@ -4,7 +4,7 @@ import download from 'react-useanimations/lib/download';
 import { confirm } from "react-confirm-box";
 import GoodsDatalist from './GoodsDatalist';
 
-const CreateInvoiceRow = ({ groups, onRowUpdate, invoiceId }) => {
+const CreateInvoiceRow = ({ groups, fetchData, onRowUpdate, invoiceId }) => {
     const [newProduct, setNewProduct] = useState({ id_tovar: 0, name: "", price: "", quantity: "", group: 1, barcode: "" });
 
     const useMountEffect = (fun) => useEffect(fun, []);
@@ -17,17 +17,6 @@ const CreateInvoiceRow = ({ groups, onRowUpdate, invoiceId }) => {
     const [barcodeFocus, setBarcodeFocus] = useFocus();
     const [quantityFocus, setQuantityFocus] = useFocus();
     useMountEffect(setBarcodeFocus);
-
-    const fetchData = (changes = {}) => {
-        return fetch("http://my.com/", {
-            method: 'POST',
-            header: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: JSON.stringify(changes)
-        })
-            .then(res => res.json())
-    }
 
     const confirmCreateProduct = async (product) => {
         let updateData = {
@@ -95,6 +84,7 @@ const CreateInvoiceRow = ({ groups, onRowUpdate, invoiceId }) => {
                     setQuantityFocus();
                 }}
                 onInput={value => setNewProduct({ ...newProduct, name: value })}
+                fetchData={fetchData}
                 inputClassName="choose-input datalist"
             />
         </div>
@@ -115,7 +105,6 @@ const CreateInvoiceRow = ({ groups, onRowUpdate, invoiceId }) => {
                     if (e.key === 'Enter') {
                         setQuantityFocus();
                         confirmCreateProduct(newProduct);
-                        // console.log(newProduct);
                     }
                 }}
                 ref={quantityFocus}

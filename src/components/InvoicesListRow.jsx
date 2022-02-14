@@ -48,6 +48,7 @@ const InvoicesListRow = ({ invoice, shops, updateInvoice, updateInvoices, select
             <td>{shops.find(shop => shop.id === invoice.tochka).name}</td>
             <td><input type="text" 
                 value={note ?? ""}
+                title={note ?? ""}
                 onChange={e => setNote(e.target.value)}
                 onBlur={updateNote}
                 onKeyDown={e => {if(e.key === 'Enter') updateNote()} }
