@@ -14,16 +14,6 @@ const Invoice = ({ rows, fetchData, onRowUpdate, id }) => {
         }, []
     );
 
-    const printInvoice = () => {
-        fetch("http://my.com/print.php", {
-            method: 'POST',
-            header: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: JSON.stringify({id})
-        })
-    }
-
     return (
         <div className="table-div invoice">
             <h2>Накладна №{id}</h2>
@@ -34,7 +24,7 @@ const Invoice = ({ rows, fetchData, onRowUpdate, id }) => {
                         <th></th>
                         <th>Назва товару</th>
                         <th>Ціна, грн.</th>
-                        <th>Клк.</th>
+                        <th>Кiльк.</th>
                         <th>Сума, грн.</th>
                         <th>Штрих-код</th>
                         <th></th>
@@ -45,10 +35,10 @@ const Invoice = ({ rows, fetchData, onRowUpdate, id }) => {
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th id="total" colSpan="4">Разом: </th>
-                        <td><b>{total}</b></td>
+                        <th id="total" colSpan="4">Разом, грн: </th>
+                        <td><b>{total.toLocaleString("en", {useGrouping: false, minimumFractionDigits: 2})}</b></td>
                         <td colSpan="2">
-                            <button onClick={printInvoice} className="print-btn" >Друкувати</button>
+                            <a href={'http://my.com/print.php?id=' + id} target="_blank"><input className="print-btn" type="button" value="Друкувати"/> </a>
                         </td>
                     </tr>
                 </tfoot>

@@ -9,7 +9,7 @@ const InvoiceRow = ({ row, id = 0, fetchData, onRowUpdate, invoiceId }) => {
     const [price, setPrice] = useState(row.price);
     const [barcode, setBarcode] = useState(row.barcode);
     const [name, setName] = useState(row.name);
-    let sum = useMemo(() => (price * quantity).toLocaleString("en",{useGrouping: false,minimumFractionDigits: 2}), [price, quantity]);
+    let sum = useMemo(() => (price * quantity).toLocaleString("en", {useGrouping: false, minimumFractionDigits: 2}), [price, quantity]);
 
     useEffect(() => {
         setName(row.name);
