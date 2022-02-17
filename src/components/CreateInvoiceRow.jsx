@@ -85,7 +85,7 @@ const CreateInvoiceRow = ({ groups, fetchData, onRowUpdate, invoiceId }) => {
                 }}
                 onInput={value => setNewProduct({ ...newProduct, name: value })}
                 fetchData={fetchData}
-                inputClassName="choose-input datalist"
+                inputClassName="choose-input datalist" 
             />
         </div>
         <div className="inputs-div">
