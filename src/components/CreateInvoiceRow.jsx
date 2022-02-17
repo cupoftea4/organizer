@@ -29,7 +29,7 @@ const CreateInvoiceRow = ({ groups, fetchData, onRowUpdate, invoiceId }) => {
             quantity: product.quantity
         }
         if (product.barcode.length >= 10) {
-            onRowUpdate(updateData);
+            onRowUpdate({...updateData, barcode: product.barcode, name: product.name});
             setNewProduct({ id_tovar: 0, name: "", price: "", quantity: "", group: 1, barcode: "" });
             setBarcodeFocus();
             return;
@@ -68,7 +68,13 @@ const CreateInvoiceRow = ({ groups, fetchData, onRowUpdate, invoiceId }) => {
                     if (e.key === 'Enter') {
                         setQuantityFocus();
                         fetchData({ task: "select-product", barcode: e.target.value })
-                            .then(setNewProduct);
+                            .then(product => {
+                                if (!product) {
+                                    setNewProduct({id_tovar: 0, barcode: e.target.value});
+                                } else {
+                                    setNewProduct(product);
+                                }
+                            });
                         }
                     }}
             ref={barcodeFocus}
