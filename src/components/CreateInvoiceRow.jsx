@@ -25,30 +25,30 @@ const CreateInvoiceRow = ({ groups, fetchData, onRowUpdate, invoiceId }) => {
     const [quantityFocus, setQuantityFocus] = useFocus();
     useMountEffect(setBarcodeFocus);
 
+    const resetNewProduct = group => setNewProduct({ id_tovar: 0, name: "", price: "", quantity: "", barcode: "",  optPrice: "", group });
     const confirmCreateProduct = async (product) => {
-        console.log("ONCLICH CREATE PRODUCT", product);
         let updateData = {
             task: 'update-invoice',
             key: 'name',
             id_vidacha: 0,
             id_nakladni: invoiceId,
             id_tovar: product.id_tovar,
+            name: product.name,
             price: product.price,
+            price_opt: product.optPrice,
             quantity: product.quantity,
             group: product.group
         }
-        console.log("ONCLICH CREATE PRODUCT before LONG BARCODE", product);
         if (product.barcode.length >= 10) {
-            console.log("ONCLICH CREATE PRODUCT LONG BARCODE");
-            onRowUpdate({...updateData, barcode: product.barcode, name: product.name});
-            setNewProduct({ id_tovar: 0, name: "", price: "", quantity: "", barcode: "", group: product.group });
+            onRowUpdate({...updateData, barcode: product.barcode});
+            resetNewProduct(product.group);
             setBarcodeFocus();
             return;
         }
         const result = await confirm("Ви впевнені, що хочете створити і додати до накладної товар", options);
         if (result) {
-            onRowUpdate({ ...updateData, id_tovar: 0, name: product.name });
-            setNewProduct({ id_tovar: 0, name: "", price: "", quantity: "", barcode: "", group: product.group });
+            onRowUpdate({ ...updateData, id_tovar: 0 });
+            resetNewProduct(product.group);
             setBarcodeFocus();
         }
     };
@@ -85,7 +85,7 @@ const CreateInvoiceRow = ({ groups, fetchData, onRowUpdate, invoiceId }) => {
                                 if (!product) {
                                     setNewProduct({id_tovar: 0, barcode: e.target.value});
                                 } else {
-                                    setNewProduct({ ...product, barcode: product.code });
+                                    setNewProduct({ ...product, barcode: product.code, optPrice: product.price_opt });
                                 }
                             });
                         }
@@ -98,7 +98,7 @@ const CreateInvoiceRow = ({ groups, fetchData, onRowUpdate, invoiceId }) => {
             <GoodsDatalist
                 value={newProduct.name}
                 onSelect={product => {
-                    setNewProduct({...newProduct, ...product});
+                    setNewProduct({ ...newProduct, ...product, optPrice: product.price_opt });
                     setQuantityFocus();
                 }}
                 onInput={value => setNewProduct({ ...newProduct, name: value })}
