@@ -30,13 +30,15 @@ const CreateInvoiceRow = ({ groups, fetchData, onRowUpdate, invoiceId }) => {
         }
         if (product.barcode.length >= 10) {
             onRowUpdate({...updateData, barcode: product.barcode, name: product.name});
-            setNewProduct({ id_tovar: 0, name: "", price: "", quantity: "", group: 1, barcode: "" });
+            setNewProduct({ id_tovar: 0, name: "", price: "", quantity: "", barcode: "", group: product.group });
             setBarcodeFocus();
             return;
         }
         const result = await confirm("Ви впевнені, що хочете створити і додати до накладної товар", options);
         if (result) {
             onRowUpdate({ ...updateData, id_tovar: 0, name: product.name });
+            setNewProduct({ id_tovar: 0, name: "", price: "", quantity: "", barcode: "", group: product.group });
+            setBarcodeFocus();
         }
     };
 
