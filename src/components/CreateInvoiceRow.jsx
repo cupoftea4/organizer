@@ -26,7 +26,8 @@ const CreateInvoiceRow = ({ groups, fetchData, onRowUpdate, invoiceId }) => {
             id_nakladni: invoiceId,
             id_tovar: product.id_tovar,
             price: product.price,
-            quantity: product.quantity
+            quantity: product.quantity,
+            group: product.group
         }
         if (product.barcode.length >= 10) {
             onRowUpdate({...updateData, barcode: product.barcode, name: product.name});
