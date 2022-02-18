@@ -7,6 +7,13 @@ import GoodsDatalist from './GoodsDatalist';
 const CreateInvoiceRow = ({ groups, fetchData, onRowUpdate, invoiceId }) => {
     const [newProduct, setNewProduct] = useState({ id_tovar: 0, name: "", price: "", quantity: "", group: 1, barcode: "" });
 
+    useEffect(
+        () => {
+            console.log("CreateInvoiceRow group:", newProduct.group);
+        }, // eslint-disable-next-line react-hooks/exhaustive-deps
+        [newProduct.group]
+    );
+
     const useMountEffect = (fun) => useEffect(fun, []);
     const useFocus = () => {
         const htmlElRef = useRef(null);
@@ -89,7 +96,7 @@ const CreateInvoiceRow = ({ groups, fetchData, onRowUpdate, invoiceId }) => {
                 value={newProduct.name}
                 group={newProduct.group}
                 onSelect={product => {
-                    setNewProduct(product);
+                    setNewProduct({...newProduct, ...product});
                     setQuantityFocus();
                 }}
                 onInput={value => setNewProduct({ ...newProduct, name: value })}

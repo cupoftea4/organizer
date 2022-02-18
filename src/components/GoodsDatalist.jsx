@@ -2,6 +2,12 @@ import React, { useEffect, useState, useMemo, useRef } from 'react';
 import DataListInput from "./DatalistLib/DataListInput";
 
 const GoodsDatalist = ({ id = 0, value, onInput, onSelect, fetchData, inputClassName, group = 1 }) => {
+    useEffect(
+        () => {
+            console.log("GoodsList group:", group);
+        }, // eslint-disable-next-line react-hooks/exhaustive-deps
+        [group]
+    );
     const [goods, setGoods] = useState([]);
     const [isMounted, setIsMounted] = useState(false);
 
