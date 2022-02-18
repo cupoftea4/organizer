@@ -58,6 +58,7 @@ const DataListInput = ({
   onClick,
   placeholder,
   title,
+  datatitle,
   requiredInputLength,
   suppressReselect,
   items,
@@ -432,7 +433,8 @@ const DataListInput = ({
         placeholder={placeholder}
         value={currentInput}
         aria-label="Search"
-        title={title}
+
+        datatitle={datatitle}
       />
       {dropDown}
     </div>
@@ -447,6 +449,7 @@ DataListInput.propTypes = {
     })
   ).isRequired,
   title: PropTypes.string,
+  datatitle: PropTypes.string,
   placeholder: PropTypes.string,
   onSelect: PropTypes.func.isRequired,
   onDropdownOpen: PropTypes.func,
@@ -470,6 +473,7 @@ DataListInput.propTypes = {
 
 DataListInput.defaultProps = {
   title: '',
+  datatitle: '',
   placeholder: '',
   match: undefined,
   inputClassName: '',

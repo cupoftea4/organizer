@@ -230,19 +230,18 @@ button {
 
 }
 
-.name-input:hover:after {
-	font-size: 50pt;
-	content: attr(data-title);
+.name-input:hover {
+	content: attr(datatitle);
 	position: absolute;
-	font: 10px verdana;
-	top: -110%;
-	left: 0;
-	background: #ace;
-	color: black;
-	box-sizing: border-box;
-	border: 1px solid gray;
-	border-radius: 20%;
-	padding: 3px;
+	font-size: 20px;
+	top: -25px;
+	background: #04AA6D;
+	box-sizing: content-box;
+	width: 500px;
+	max-width: 500px;
+	padding: 5px;
+	border: 1px solid #fff;
+	color: rgb(255, 255, 255);
   }
 
 #datalist-div {

@@ -55,7 +55,7 @@ const GoodsDatalist = ({ id = 0, value, onInput, onSelect, fetchData, inputClass
         itemClassName="dropdownItem"
         inputClassName={inputClassName}
         placeholder="Назва товару"
-        // data-title={value}
+        datatitle={value}
     />);
 };
 
