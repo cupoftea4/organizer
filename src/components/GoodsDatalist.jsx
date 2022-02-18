@@ -1,13 +1,13 @@
 import React, { useEffect, useState, useMemo, useRef } from 'react';
 import DataListInput from "./DatalistLib/DataListInput";
 
-const GoodsDatalist = ({ id = 0, value, onInput, onSelect, fetchData, inputClassName, group = 1 }) => {
-    useEffect(
-        () => {
-            console.log("GoodsList group:", group);
-        }, // eslint-disable-next-line react-hooks/exhaustive-deps
-        [group]
-    );
+const GoodsDatalist = ({ id = 0, value, onInput, onSelect, fetchData, inputClassName}) => {
+    // useEffect(
+    //     () => {
+    //         console.log("GoodsList group:", group);
+    //     }, // eslint-disable-next-line react-hooks/exhaustive-deps
+    //     [group]
+    // );
     const [goods, setGoods] = useState([]);
     const [isMounted, setIsMounted] = useState(false);
 
@@ -25,7 +25,7 @@ const GoodsDatalist = ({ id = 0, value, onInput, onSelect, fetchData, inputClass
     );
 
     const searchGoods = (property) => {
-            fetchData({ task: "find-goods", property, group }).then(setGoods);            
+            fetchData({ task: "find-goods", property }).then(setGoods);            
     }
 
     const items = useMemo(
@@ -55,7 +55,7 @@ const GoodsDatalist = ({ id = 0, value, onInput, onSelect, fetchData, inputClass
         itemClassName="dropdownItem"
         inputClassName={inputClassName}
         placeholder="Назва товару"
-        title={value}
+        // data-title={value}
     />);
 };
 

@@ -5,7 +5,7 @@ import { confirm } from "react-confirm-box";
 import GoodsDatalist from './GoodsDatalist';
 
 const CreateInvoiceRow = ({ groups, fetchData, onRowUpdate, invoiceId }) => {
-    const [newProduct, setNewProduct] = useState({ id_tovar: 0, name: "", price: "", quantity: "", group: 1, barcode: "" });
+    const [newProduct, setNewProduct] = useState({ id_tovar: 0, name: "", price: "", optPrice: "", quantity: "", group: 1, barcode: "" });
 
     useEffect(
         () => {
@@ -26,6 +26,7 @@ const CreateInvoiceRow = ({ groups, fetchData, onRowUpdate, invoiceId }) => {
     useMountEffect(setBarcodeFocus);
 
     const confirmCreateProduct = async (product) => {
+        console.log("ONCLICH CREATE PRODUCT", product);
         let updateData = {
             task: 'update-invoice',
             key: 'name',
@@ -36,7 +37,9 @@ const CreateInvoiceRow = ({ groups, fetchData, onRowUpdate, invoiceId }) => {
             quantity: product.quantity,
             group: product.group
         }
+        console.log("ONCLICH CREATE PRODUCT before LONG BARCODE", product);
         if (product.barcode.length >= 10) {
+            console.log("ONCLICH CREATE PRODUCT LONG BARCODE");
             onRowUpdate({...updateData, barcode: product.barcode, name: product.name});
             setNewProduct({ id_tovar: 0, name: "", price: "", quantity: "", barcode: "", group: product.group });
             setBarcodeFocus();
@@ -82,7 +85,7 @@ const CreateInvoiceRow = ({ groups, fetchData, onRowUpdate, invoiceId }) => {
                                 if (!product) {
                                     setNewProduct({id_tovar: 0, barcode: e.target.value});
                                 } else {
-                                    setNewProduct(product);
+                                    setNewProduct({ ...product, barcode: product.code });
                                 }
                             });
                         }
@@ -94,7 +97,6 @@ const CreateInvoiceRow = ({ groups, fetchData, onRowUpdate, invoiceId }) => {
         <div id="datalist-div">
             <GoodsDatalist
                 value={newProduct.name}
-                group={newProduct.group}
                 onSelect={product => {
                     setNewProduct({...newProduct, ...product});
                     setQuantityFocus();
@@ -106,6 +108,13 @@ const CreateInvoiceRow = ({ groups, fetchData, onRowUpdate, invoiceId }) => {
         </div>
         <div className="inputs-div">
             <input
+                className="choose-input num near-datalist"
+                type="text"
+                value={newProduct.optPrice}
+                onChange={event => setNewProduct({ ...newProduct, optPrice: event.target.value })}
+                placeholder="Ціна опт   "
+            />
+            <input
                 className="choose-input num"
                 type="text"
                 value={newProduct.price}
@@ -113,7 +122,7 @@ const CreateInvoiceRow = ({ groups, fetchData, onRowUpdate, invoiceId }) => {
                 placeholder="Ціна"
             />
             <input
-                className="choose-input num"
+                className="choose-input num quantity"
                 type="text"
                 value={newProduct.quantity}
                 onChange={event => setNewProduct({ ...newProduct, quantity: event.target.value })}
@@ -124,7 +133,7 @@ const CreateInvoiceRow = ({ groups, fetchData, onRowUpdate, invoiceId }) => {
                     }
                 }}
                 ref={quantityFocus}
-                placeholder="Кількість"
+                placeholder="Кільк."
             />
 
             <UseAnimations

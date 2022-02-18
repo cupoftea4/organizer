@@ -159,7 +159,7 @@ button {
 .create-row {
 	display: block;
 	max-width: 800px;
-	width: 750px; 
+	width: 800px; 
 	height: 50px;
 	padding: 5px;
 	margin: 10px;
@@ -184,12 +184,13 @@ button {
 } 
 
 .choose-input.select {
+	width: 90px;
 	height: 30px;
 }
 
 .choose-input.num {
-	width: 55px;
-	margin-left: 20px;
+	width: 40px;
+	margin-left: 5px; 
 }
 
 .choose-input.date {
@@ -202,6 +203,15 @@ button {
 
 .choose-input.shop {
 	width: 90px;
+}
+
+.choose-input.quantity {
+	width: 37px;
+}
+
+.choose-input.near-datalist {
+	margin-left: 20px;
+	width: 57px;
 }
 
 .inputs-div {
@@ -220,12 +230,27 @@ button {
 
 }
 
+.name-input:hover:after {
+	font-size: 50pt;
+	content: attr(data-title);
+	position: absolute;
+	font: 10px verdana;
+	top: -110%;
+	left: 0;
+	background: #ace;
+	color: black;
+	box-sizing: border-box;
+	border: 1px solid gray;
+	border-radius: 20%;
+	padding: 3px;
+  }
+
 #datalist-div {
 	margin: 5px;
 	/* display: inline-block; */
 	float: left;
  	max-width: 500px;
-	width: 250px;
+	width: 280px;
 	margin: 5px 5px 5px 0;
 	/* padding: 6px; */
 
