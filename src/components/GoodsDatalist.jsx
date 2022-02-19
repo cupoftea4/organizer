@@ -31,9 +31,8 @@ const GoodsDatalist = ({ id = 0, value, onInput, onSelect, fetchData, inputClass
     const items = useMemo(
         () => {
             return goods.map((product) => ({
-                label: product.name?.replace(/&quot;/g, '"') + " - " + ((product?.id_tovar) ? (product.price + "грн." + " | " + product.code) : ""),
+                label: product.name?.replace(/&quot;/g, '"') + " - " + ((product?.id_tovar) ? (product.price + "грн." + " | " + product.barcode) : ""),
                 key: product.id_tovar,
-                barcode: product.code,
                 quantity: "",
                 ...product,
             }))

@@ -35,7 +35,7 @@ const CreateInvoiceRow = ({ groups, fetchData, onRowUpdate, invoiceId }) => {
             id_tovar: product.id_tovar,
             name: product.name,
             price: product.price,
-            price_opt: product.optPrice,
+            optPrice: product.optPrice,
             quantity: product.quantity,
             group: product.group
         }
@@ -69,7 +69,7 @@ const CreateInvoiceRow = ({ groups, fetchData, onRowUpdate, invoiceId }) => {
 
     return <div className="create-row" >
         <div className="inputs-div">
-            <select className="choose-input select" onChange={e => setNewProduct({ ...newProduct, group: e.target.value })}>
+            <select value={newProduct.group} className="choose-input select" onChange={e => setNewProduct({ ...newProduct, group: e.target.value })}>
                 {groups.map(group => <option value={group.id} key={group.id}>{group.name}</option>)}
             </select>
             <input
@@ -85,7 +85,7 @@ const CreateInvoiceRow = ({ groups, fetchData, onRowUpdate, invoiceId }) => {
                                 if (!product) {
                                     setNewProduct({id_tovar: 0, barcode: e.target.value});
                                 } else {
-                                    setNewProduct({ ...product, barcode: product.code, optPrice: product.price_opt });
+                                    setNewProduct({ ...product });
                                 }
                             });
                         }
@@ -98,7 +98,7 @@ const CreateInvoiceRow = ({ groups, fetchData, onRowUpdate, invoiceId }) => {
             <GoodsDatalist
                 value={newProduct.name}
                 onSelect={product => {
-                    setNewProduct({ ...newProduct, ...product, optPrice: product.price_opt });
+                    setNewProduct({ ...newProduct, ...product });
                     setQuantityFocus();
                 }}
                 onInput={value => setNewProduct({ ...newProduct, name: value })}

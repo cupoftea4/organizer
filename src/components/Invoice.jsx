@@ -4,7 +4,7 @@ import CreateInvoiceRow from './CreateInvoiceRow';
 
 
 const Invoice = ({ rows, fetchData, onRowUpdate, id }) => {
-    const total = useMemo(() => rows.reduce((acc, row) => acc + (row.price * row.quantity), 0), [rows]); 
+    const total = useMemo(() => rows.reduce((acc, row) => acc + (row.price * row.quantity), 0).toLocaleString("en", {useGrouping: false, minimumFractionDigits: 2}), [rows]); 
     const [groups, setGroups] = useState([{ id: 1, name: "" }]);
 
     useEffect (
@@ -16,7 +16,7 @@ const Invoice = ({ rows, fetchData, onRowUpdate, id }) => {
 
     return (
         <div className="table-div invoice">
-            <h2>Накладна №{id}</h2>
+            <h2>Накладна №{id} <span style={{"fontSize": "14px"}}> Сума: {total}грн </span> </h2>
             <CreateInvoiceRow groups={groups} fetchData={fetchData} onRowUpdate={onRowUpdate} invoiceId={id} />
             <table>
                 <tbody>
@@ -36,7 +36,7 @@ const Invoice = ({ rows, fetchData, onRowUpdate, id }) => {
                 <tfoot>
                     <tr>
                         <th id="total" colSpan="4">Разом, грн: </th>
-                        <td><b>{total.toLocaleString("en", {useGrouping: false, minimumFractionDigits: 2})}</b></td>
+                        <td><b>{total}</b></td>
                         <td colSpan="2">
                             <a href={'http://my.com/print.php?id=' + id} target="_blank"><input className="print-btn" type="button" value="Друкувати"/> </a>
                         </td>
