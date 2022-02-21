@@ -85,7 +85,7 @@ const CreateInvoiceRow = ({ groups, fetchData, onRowUpdate, invoiceId }) => {
                                 if (!product) {
                                     setNewProduct({id_tovar: 0, barcode: e.target.value});
                                 } else {
-                                    setNewProduct({ ...product });
+                                    setNewProduct(product);
                                 }
                             });
                         }
