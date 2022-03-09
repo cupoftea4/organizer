@@ -11,6 +11,7 @@ const Tables = () => {
 
     const [selectedDate, setSelectedDate] = useState({ year: [], month: []});
     const [dates, setDates] = useState({ years: [], months: []});
+    // console.log("rerendered");
     
     useEffect(() => {
         getUptoDateInvoices();
