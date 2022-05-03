@@ -74,7 +74,9 @@ const CreateInvoiceRow = ({ groups, fetchData, onRowUpdate, invoiceId }) => {
             </select>
             <input
                 className="choose-input"
-                type="text"
+                type="number"
+                min="0"
+                max="999999999999999"
                 value={newProduct.barcode}
                 onChange={event => setNewProduct({ ...newProduct, barcode: event.target.value })}
                 onKeyDown={e => {
@@ -109,21 +111,21 @@ const CreateInvoiceRow = ({ groups, fetchData, onRowUpdate, invoiceId }) => {
         <div className="inputs-div">
             <input
                 className="choose-input num near-datalist"
-                type="text"
+                type="number"
                 value={newProduct.optPrice}
                 onChange={event => setNewProduct({ ...newProduct, optPrice: event.target.value })}
                 placeholder="Ціна опт   "
             />
             <input
                 className="choose-input num"
-                type="text"
+                type="number"
                 value={newProduct.price}
                 onChange={event => setNewProduct({ ...newProduct, price: event.target.value })}
                 placeholder="Ціна"
             />
             <input
                 className="choose-input num quantity"
-                type="text"
+                type="number"
                 value={newProduct.quantity}
                 onChange={event => setNewProduct({ ...newProduct, quantity: event.target.value })}
                 onKeyDown={e => {
@@ -135,7 +137,6 @@ const CreateInvoiceRow = ({ groups, fetchData, onRowUpdate, invoiceId }) => {
                 ref={quantityFocus}
                 placeholder="Кільк."
             />
-
             <UseAnimations
                 animation={download}
                 size={40}
