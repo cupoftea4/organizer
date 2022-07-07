@@ -3,12 +3,6 @@ import { useTransition } from 'react';
 import DataListInput from "./DatalistLib/DataListInput";
 
 const GoodsDatalist = ({ id = 0, value, onInput, onSelect, fetchData, inputClassName}) => {
-    // useEffect(
-    //     () => {
-    //         console.log("GoodsList group:", group);
-    //     }, // eslint-disable-next-line react-hooks/exhaustive-deps
-    //     [group]
-    // );
     const [startTransition] = useTransition();
     const [goods, setGoods] = useState([]);
     const [isMounted, setIsMounted] = useState(false);
@@ -33,6 +27,7 @@ const GoodsDatalist = ({ id = 0, value, onInput, onSelect, fetchData, inputClass
     const items = useMemo(
         () => {
             return goods.map((product) => ({
+                // eslint-disable-next-line
                 label: product.name?.replace(/&quot;/g, '"') + " - " + ((product?.id_tovar) ? (product.price + "грн." + " | " + product.barcode) : ""),
                 key: product.id_tovar,
                 quantity: "",

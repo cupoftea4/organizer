@@ -7,14 +7,7 @@ import GoodsDatalist from './GoodsDatalist';
 const CreateInvoiceRow = ({ groups, fetchData, onRowUpdate, invoiceId }) => {
     const [newProduct, setNewProduct] = useState({ id_tovar: 0, name: "", price: "", optPrice: "", quantity: "", group: 1, barcode: "" });
 
-    useEffect(
-        () => {
-            console.log("CreateInvoiceRow group:", newProduct.group);
-        }, // eslint-disable-next-line react-hooks/exhaustive-deps
-        [newProduct.group]
-    );
-
-    const useMountEffect = (fun) => useEffect(fun, []);
+    const useMountEffect = (fun) => useEffect(fun, [fun]);
     const useFocus = () => {
         const htmlElRef = useRef(null);
         const setFocus = () => { htmlElRef.current && htmlElRef.current.focus() }
@@ -32,7 +25,7 @@ const CreateInvoiceRow = ({ groups, fetchData, onRowUpdate, invoiceId }) => {
             if (!result) return;
         }
         if (!parseFloat(product.price) || !parseFloat(product.optPrice) || !product.name || !parseInt(product.quantity)) {
-            const result = await confirm("OБЕРЕЖНО! Не всі дані введено або введено неправильно. Товар НЕ буде додано.", warningOptions);
+            await confirm("OБЕРЕЖНО! Не всі дані введено або введено неправильно. Товар НЕ буде додано.", warningOptions);
             return;
         }
         let updateData = {

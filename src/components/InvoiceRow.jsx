@@ -42,7 +42,8 @@ const InvoiceRow = ({ row, id = 0, fetchData, onRowUpdate, invoiceId }) => {
     const updateInvoice = (product) => onRowUpdate({
         task: 'update-invoice',
         id_vidacha: row.id,
-        ...product
+        ...product,
+        quantity
     });
 
     return (
@@ -56,9 +57,9 @@ const InvoiceRow = ({ row, id = 0, fetchData, onRowUpdate, invoiceId }) => {
                     value={name}
                     onSelect={product => {
                         setName(product.name);
-                        updateInvoice({ key: "name", property: product.name, id_tovar: product.id_tovar });
+                        updateInvoice({ key: "product-changed", price: product.price,  id_tovar: product.id_tovar });
                     }} 
-                    onInput={ value => setName(value)}
+                    onInput={value => setName(value)}
                     fetchData={fetchData}
                     inputClassName="name-input"
                 />

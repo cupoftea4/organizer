@@ -8,6 +8,7 @@ const InvoicesList = ({ invoices, fetchData, updateInvoices, onRowUpdate, select
 
     useEffect(() => {
         fetchData({task: "get-shops"}).then(setShops);
+        // eslint-disable-next-line
     }, []);
 
     useEffect(() => {
@@ -15,9 +16,7 @@ const InvoicesList = ({ invoices, fetchData, updateInvoices, onRowUpdate, select
             setSelectedInvoiceId(invoices[0]?.id);
             onRowUpdate({ task: "get-table", id: invoices[0]?.id })
         } else setIsMounted(true);
-        // if(invoices.length == 0) {
-
-        // }
+        // if(invoices.length == 0) 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [invoices]);
 
