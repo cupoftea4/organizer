@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useMemo, useRef } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
+import { useTransition } from 'react';
 import DataListInput from "./DatalistLib/DataListInput";
 
 const GoodsDatalist = ({ id = 0, value, onInput, onSelect, fetchData, inputClassName}) => {
@@ -8,6 +9,7 @@ const GoodsDatalist = ({ id = 0, value, onInput, onSelect, fetchData, inputClass
     //     }, // eslint-disable-next-line react-hooks/exhaustive-deps
     //     [group]
     // );
+    const [startTransition] = useTransition();
     const [goods, setGoods] = useState([]);
     const [isMounted, setIsMounted] = useState(false);
 
@@ -47,7 +49,7 @@ const GoodsDatalist = ({ id = 0, value, onInput, onSelect, fetchData, inputClass
         onSelect={product => onSelect(product)}
         onInput={value => {
             onInput(value);
-            handleSearch(value);
+            startTransition(() => handleSearch(value));
         }}
         match={match}
         dropdownClassName="dropdown"
