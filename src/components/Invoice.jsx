@@ -11,6 +11,7 @@ const Invoice = ({ rows, fetchData, onRowUpdate, id }) => {
         ()  =>  {
             fetchData({task: "get-groups"})
                 .then(setGroups);
+        // eslint-disable-next-line      
         }, []
     );
 
@@ -38,7 +39,7 @@ const Invoice = ({ rows, fetchData, onRowUpdate, id }) => {
                         <th id="total" colSpan="4">Разом, грн: </th>
                         <td><b>{total}</b></td>
                         <td colSpan="2">
-                            <a href={'http://my.com/print.php?id=' + id} target="_blank"><input className="print-btn" type="button" value="Друкувати"/> </a>
+                            <a href={'http://my.com/print.php?id=' + id} target="_blank" rel="noreferrer"><input className="print-btn" type="button" value="Друкувати"/> </a>
                         </td>
                     </tr>
                 </tfoot>

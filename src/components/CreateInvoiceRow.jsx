@@ -7,14 +7,7 @@ import GoodsDatalist from './GoodsDatalist';
 const CreateInvoiceRow = ({ groups, fetchData, onRowUpdate, invoiceId }) => {
     const [newProduct, setNewProduct] = useState({ id_tovar: 0, name: "", price: "", optPrice: "", quantity: "", group: 1, barcode: "" });
 
-    useEffect(
-        () => {
-            console.log("CreateInvoiceRow group:", newProduct.group);
-        }, // eslint-disable-next-line react-hooks/exhaustive-deps
-        [newProduct.group]
-    );
-
-    const useMountEffect = (fun) => useEffect(fun, []);
+    const useMountEffect = (fun) => useEffect(fun, [fun]);
     const useFocus = () => {
         const htmlElRef = useRef(null);
         const setFocus = () => { htmlElRef.current && htmlElRef.current.focus() }
@@ -27,6 +20,14 @@ const CreateInvoiceRow = ({ groups, fetchData, onRowUpdate, invoiceId }) => {
 
     const resetNewProduct = group => setNewProduct({ id_tovar: 0, name: "", price: "", quantity: "", barcode: "",  optPrice: "", group });
     const confirmCreateProduct = async (product) => {
+        if (!product.group) {
+            const result = await confirm("OБЕРЕЖНО! Група цього товару 0. Продовжити?", options);
+            if (!result) return;
+        }
+        if (!parseFloat(product.price) || !parseFloat(product.optPrice) || !product.name || !parseInt(product.quantity)) {
+            await confirm("OБЕРЕЖНО! Не всі дані введено або введено неправильно. Товар НЕ буде додано.", warningOptions);
+            return;
+        }
         let updateData = {
             task: 'update-invoice',
             key: 'name',
@@ -36,7 +37,7 @@ const CreateInvoiceRow = ({ groups, fetchData, onRowUpdate, invoiceId }) => {
             name: product.name,
             price: product.price,
             optPrice: product.optPrice,
-            quantity: product.quantity,
+            quantity: parseInt(product.quantity),
             group: product.group
         }
         if (product.barcode.length >= 10) {
@@ -61,6 +62,19 @@ const CreateInvoiceRow = ({ groups, fetchData, onRowUpdate, invoiceId }) => {
                         <p> {message} <b>{newProduct.name}</b> {"?"} </p>
                         <button onClick={onConfirm} className="agree-button"> Так </button>
                         <button onClick={onCancel} className="disagree-button"> Ні </button>
+                    </div>
+                </div>
+            );
+        }
+    }
+
+    const warningOptions = {
+        render: (message, onConfirm) => {
+            return ( 
+                <div className="confirm-container">
+                    <div>
+                        <p> {message} </p>
+                        <button onClick={onConfirm} className="agree-button"> Зрозуміло </button>
                     </div>
                 </div>
             );

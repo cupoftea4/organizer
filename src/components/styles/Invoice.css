@@ -54,7 +54,7 @@ table th {
 
 #tables {
 	display: flex;
-	justify-content: start;  
+	justify-content: flex-start;  
 }
 
 
