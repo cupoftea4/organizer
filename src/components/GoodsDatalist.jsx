@@ -21,7 +21,7 @@ const GoodsDatalist = ({ id = 0, value, onInput, onSelect, fetchData, inputClass
     );
 
     const searchGoods = (property) => {
-            fetchData({ task: "find-goods", property }).then(setGoods);            
+        fetchData({ task: "find-goods", property }).then(setGoods);            
     }
 
     const items = useMemo(

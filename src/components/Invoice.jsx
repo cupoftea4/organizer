@@ -31,7 +31,14 @@ const Invoice = ({ rows, fetchData, onRowUpdate, id }) => {
                         <th></th>
                     </tr>
                     {rows.map((row, index) => {
-                        return <InvoiceRow id={index+1} row={row} key={row.id} fetchData={fetchData} onRowUpdate={onRowUpdate} invoiceId={id}  />
+                        return <InvoiceRow 
+                                id={index+1} 
+                                row={row} 
+                                key={row.id} 
+                                fetchData={fetchData} 
+                                onRowUpdate={onRowUpdate} 
+                                invoiceId={id}  
+                            />
                     })}
                 </tbody>
                 <tfoot>
@@ -39,7 +46,9 @@ const Invoice = ({ rows, fetchData, onRowUpdate, id }) => {
                         <th id="total" colSpan="4">Разом, грн: </th>
                         <td><b>{total}</b></td>
                         <td colSpan="2">
-                            <a href={'http://my.com/print.php?id=' + id} target="_blank" rel="noreferrer"><input className="print-btn" type="button" value="Друкувати"/> </a>
+                            <a href={'http://my.com/print.php?id=' + id} rel="noreferrer" target="_blank" >
+                                <input className="print-btn" type="button" value="Друкувати"/> 
+                            </a>
                         </td>
                     </tr>
                 </tfoot>

@@ -7,7 +7,9 @@ import GoodsDatalist from './GoodsDatalist';
 const CreateInvoiceRow = ({ groups, fetchData, onRowUpdate, invoiceId }) => {
     const [newProduct, setNewProduct] = useState({ id_tovar: 0, name: "", price: "", optPrice: "", quantity: "", group: 1, barcode: "" });
 
-    const useMountEffect = (fun) => useEffect(fun, [fun]);
+    // eslint-disable-next-line
+    const useMountEffect = (fun) => useEffect(fun, []);
+    
     const useFocus = () => {
         const htmlElRef = useRef(null);
         const setFocus = () => { htmlElRef.current && htmlElRef.current.focus() }

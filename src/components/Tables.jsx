@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Invoice from './Invoice';
 import InvoicesList from './InvoicesList';
 import SelectDate from './SelectDate';
-import './styles/Invoice.css';
 
 const Tables = () => {
     const [invoiceRows, setInvoiceRows] = useState([]);
@@ -19,7 +18,7 @@ const Tables = () => {
     }, []);
 
 
-    const fetchData = (changes = {}) => {
+    const fetchData = async (changes = {}) => {
         return fetch("http://my.com/", {
             method: 'POST',
             header: {
