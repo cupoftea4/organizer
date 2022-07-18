@@ -295,3 +295,21 @@ button {
 	cursor: pointer;
 	background-color: #06c27d;
 }
+
+
+.status {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: 25rem;
+	height: 13rem;
+	background-color: rgb(216, 216, 216);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 2rem;
+	border-radius: .75rem;
+}	
+
+

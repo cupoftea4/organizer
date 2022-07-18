@@ -34,7 +34,7 @@ const InvoicesList = ({ invoices, fetchData, updateInvoices, onRowUpdate, select
                     </tr>
                 </thead>
                 <tbody>
-                    {invoices.map(invoice => <InvoicesListRow
+                    {invoices?.map(invoice => <InvoicesListRow
                         invoice={invoice}
                         key={invoice.id}
                         shops={shops}

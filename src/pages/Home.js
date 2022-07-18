@@ -1,6 +1,6 @@
 import React from 'react';
-import Tables from './components/Tables';
-import './styles/App.css';
+import Tables from '../components/Tables';
+import '../styles/App.css';
 
 /****************************************
 TODO: 
@@ -19,7 +19,7 @@ TODO:
  
 *****************************************/
 
-function App() {
+function Home() {
   return (
     <div className="App">
       <Tables />
@@ -27,5 +27,5 @@ function App() {
   )
 }
 
-export default App  
+export default Home  
 

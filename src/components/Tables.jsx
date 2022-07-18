@@ -11,11 +11,13 @@ const Tables = () => {
 
     const [selectedDate, setSelectedDate] = useState({ year: [], month: []});
     const [dates, setDates] = useState({ years: [], months: []});
+    const [dataStatus, setDataStatus] = useState('pending');
     
     useEffect(() => {
         getUptoDateInvoices();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
 
     const fetchData = (changes = {}) => {
         return fetch("http://my.com/", {
@@ -25,10 +27,13 @@ const Tables = () => {
             },
             body: JSON.stringify(changes)
         }).then(res => {
+            if (res.ok) setDataStatus('resolved');
             let r;
             console.log(r = res.json(), changes)
             return r
-        });
+        }).catch(err => {
+            setDataStatus('rejected');
+        })
     }
 
 
@@ -41,8 +46,8 @@ const Tables = () => {
                     task: "get-invoices",
                     date: (dates.months[0] + "-" + dates.years[0])
                 })
-                    .then(setInvoices)
-            })
+                    .then(setInvoices);
+            });
     }
 
 
@@ -63,7 +68,7 @@ const Tables = () => {
             .then(months => {
                 setDates({...dates, months}); 
                 onMonthChange((months.includes(selectedDate.month))?selectedDate.month:months[0], year)
-            })
+            });
     }
 
     const onMonthChange = (month, year) => {
@@ -72,18 +77,29 @@ const Tables = () => {
             task: "get-invoices",
             date: (month + "-" + year)
         })
-            .then(setInvoices)
+            .then(setInvoices);
     }
 
     return (
         <div>
-            <div className="select-date-div">
-                <SelectDate dates={dates} onYearChange={onYearChange} selectedDate={selectedDate} onMonthChange={onMonthChange}/>
-            </div>
-            <div id="tables">
-                <InvoicesList invoices={invoices} fetchData={fetchData} updateInvoices={handleInvoicesUpdate} onRowUpdate={handleRowUpdate} selectedInvoiceId={selectedInvoiceId} setSelectedInvoiceId={setSelectedInvoiceId} />
-                <Invoice rows={invoiceRows} fetchData={fetchData} onRowUpdate={handleRowUpdate} id={selectedInvoiceId} />
-            </div>
+            {dataStatus === 'resolved' && 
+            <>
+                <div className="select-date-div">
+                    <SelectDate dates={dates} onYearChange={onYearChange} selectedDate={selectedDate} onMonthChange={onMonthChange}/>
+                </div>
+                <div id="tables">
+                    <InvoicesList invoices={invoices} fetchData={fetchData} updateInvoices={handleInvoicesUpdate} onRowUpdate={handleRowUpdate} selectedInvoiceId={selectedInvoiceId} setSelectedInvoiceId={setSelectedInvoiceId} />
+                    <Invoice rows={invoiceRows} fetchData={fetchData} onRowUpdate={handleRowUpdate} id={selectedInvoiceId} />
+                </div>
+            </> }
+            {dataStatus === 'pending' && <div className='status loading'>Loading...</div> }
+            {dataStatus === 'rejected' && 
+                <div className='status error'>
+                    <div className='loader'>
+                    <div/>
+                    Error
+                </div>
+            </div> }
         </div>
     )
 }
