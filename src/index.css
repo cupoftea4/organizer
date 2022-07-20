@@ -1,4 +1,123 @@
 * {
+	font-family: var(--font-family);
+}
+
+body::-webkit-scrollbar {
+	width: 1rem;
+}
+
+body::-webkit-scrollbar-track {
+	background: var(--gray-400);
+}
+
+body::-webkit-scrollbar-thumb {
+	background-color: var(--primary-clr) ;
+	border-radius: .5rem;
+}
+
+.clickable {
+	cursor: pointer;
+}
+
+table {
+	border-collapse: collapse;
+	text-overflow: ellipsis;
+	stroke: black;
+	font-weight: 500;
+}
+
+table th {
+	background-color: var(--primary-clr);
+	color: var(--secondary-clr);
+	font-weight: bold;
+	padding: .5rem 0;
+	font-size: 1.25rem;
+}
+
+table input {
+	border: none;
+	width: 100%;
+	background-color: inherit;
+	color: inherit;
+	font-family: inherit;
+}
+
+table td {
+	padding: .5rem;
+	width: 6rem;
+	box-sizing: content-box;
+}
+
+table tbody td {
+	border: 1px solid #ddd;
+}
+
+table .right-align {
+	text-align: right;
+}
+
+table path {
+	color: inherit;
+	stroke: inherit;
+}
+
+.primary-button {
+	background-color: var(--dark-primary-clr);
+	color: var(--secondary-clr);
+	border: none;
+	padding: .25rem .5rem;
+	font-size: 1.25rem;
+	border-radius: .5rem;
+	text-align: center;
+	cursor: pointer;
+}
+
+.primary-button:hover {
+	background-color: var(--primary-clr);
+}
+
+.red {
+	background-color: var(--red-400);
+}
+
+.red:hover {
+	background-color: var(--red-600);
+}
+
+.center-container {
+	padding: 1rem;
+	background-color: var(--gray-400);
+	border-radius: .5rem;
+	border: 1px solid var(--gray-800);
+
+	display: flex;	
+	align-items: center;
+	justify-content: center;
+	gap: .5rem;
+
+    position: fixed;
+    left: 50%;
+    top: 50%;
+	transform: translate(-50%, -50%);
+    z-index: 100;
+
+    min-height: 10rem;
+    width: 30rem;
+}
+
+.error {
+	border: 3px solid var(--red-600);
+}
+
+.error button {
+	background-color: var(--gray-600);
+}
+
+.error button:hover {
+	background-color: var(--gray-800);
+}
+
+/* * {
 	margin: 0;
 	padding: 0;
 	text-decoration: none;
@@ -79,4 +198,4 @@ code {
 
 .disagree-button:hover {
 	background-color: #04AA6D;
-}
+} */

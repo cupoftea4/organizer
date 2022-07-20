@@ -59,12 +59,10 @@ const CreateInvoiceRow = ({ groups, fetchData, onRowUpdate, invoiceId }) => {
     const options = {
         render: (message, onConfirm, onCancel) => {
             return ( 
-                <div className="confirm-container">
-                    <div>
-                        <p> {message} <b>{newProduct.name}</b> {"?"} </p>
-                        <button onClick={onConfirm} className="agree-button"> Так </button>
-                        <button onClick={onCancel} className="disagree-button"> Ні </button>
-                    </div>
+                <div className="center-container">
+                    <p> {message} <b>{newProduct.name}</b>{"?"} </p>
+                    <button onClick={onConfirm} className="primary-button red"> Так </button>
+                    <button onClick={onCancel} className="primary-button"> Ні </button>
                 </div>
             );
         }
@@ -73,46 +71,42 @@ const CreateInvoiceRow = ({ groups, fetchData, onRowUpdate, invoiceId }) => {
     const warningOptions = {
         render: (message, onConfirm) => {
             return ( 
-                <div className="confirm-container">
-                    <div>
-                        <p> {message} </p>
-                        <button onClick={onConfirm} className="agree-button"> Зрозуміло </button>
-                    </div>
+                <div className="center-container error">
+                    <p> {message} </p>
+                    <button onClick={onConfirm} className="primary-button"> Зрозуміло </button>
                 </div>
             );
         }
     }
 
-    return <div className="create-row" >
-        <div className="inputs-div">
-            <select value={newProduct.group} className="choose-input select" onChange={e => setNewProduct({ ...newProduct, group: e.target.value })}>
-                {groups.map(group => <option value={group.id} key={group.id}>{group.name}</option>)}
-            </select>
-            <input
-                className="choose-input"
-                type="number"
-                min="0"
-                max="999999999999999"
-                value={newProduct.barcode}
-                onChange={event => setNewProduct({ ...newProduct, barcode: event.target.value })}
-                onKeyDown={e => {
-                    if (e.key === 'Enter') {
-                        setQuantityFocus();
-                        fetchData({ task: "select-product", barcode: e.target.value })
-                            .then(product => {
-                                if (!product) {
-                                    setNewProduct({id_tovar: 0, barcode: e.target.value});
-                                } else {
-                                    setNewProduct(product);
-                                }
-                            });
-                        }
-                    }}
+    return <div className="green-box" >
+        <select value={newProduct.group} className="create-input" onChange={e => setNewProduct({ ...newProduct, group: e.target.value })}>
+            {groups.map(group => <option value={group.id} key={group.id}>{group.name}</option>)}
+        </select>
+        <input
+            className="create-input"
+            type="number"
+            min="0"
+            max="999999999999999"
+            value={newProduct.barcode}
+            onChange={event => setNewProduct({ ...newProduct, barcode: event.target.value })}
+            onKeyDown={e => {
+                if (e.key === 'Enter') {
+                    setQuantityFocus();
+                    fetchData({ task: "select-product", barcode: e.target.value })
+                        .then(product => {
+                            if (!product) {
+                                setNewProduct({id_tovar: 0, barcode: e.target.value});
+                            } else {
+                                setNewProduct(product);
+                            }
+                        });
+                    }
+                }}
             ref={barcodeFocus}
             placeholder="Штрих-код"
-                />
-        </div>
-        <div id="datalist-div">
+        />
+        <div className="name-input">
             <GoodsDatalist
                 value={newProduct.name}
                 onSelect={product => {
@@ -121,47 +115,45 @@ const CreateInvoiceRow = ({ groups, fetchData, onRowUpdate, invoiceId }) => {
                 }}
                 onInput={value => setNewProduct({ ...newProduct, name: value })}
                 fetchData={fetchData}
-                inputClassName="choose-input datalist" 
+                inputClassName="create-input" 
             />
         </div>
-        <div className="inputs-div">
-            <input
-                className="choose-input num near-datalist"
-                type="number"
-                value={newProduct.optPrice}
-                onChange={event => setNewProduct({ ...newProduct, optPrice: event.target.value })}
-                placeholder="Ціна опт   "
-            />
-            <input
-                className="choose-input num"
-                type="number"
-                value={newProduct.price}
-                onChange={event => setNewProduct({ ...newProduct, price: event.target.value })}
-                placeholder="Ціна"
-            />
-            <input
-                className="choose-input num quantity"
-                type="number"
-                value={newProduct.quantity}
-                onChange={event => setNewProduct({ ...newProduct, quantity: event.target.value })}
-                onKeyDown={e => {
-                    if (e.key === 'Enter') {
-                        setQuantityFocus();
-                        confirmCreateProduct(newProduct);
-                    }
-                }}
-                ref={quantityFocus}
-                placeholder="Кільк."
-            />
-            <UseAnimations
-                animation={download}
-                size={40}
-                strokeColor="white"
-                fillColor="white"
-                onClick={() => confirmCreateProduct(newProduct)}
-                className="anim-btn"
-            />
-        </div>
+        <input
+            className="create-input number-input"
+            type="number"
+            value={newProduct.optPrice}
+            onChange={event => setNewProduct({ ...newProduct, optPrice: event.target.value })}
+            placeholder="Ціна опт   "
+        />
+        <input
+            className="create-input number-input"
+            type="number"
+            value={newProduct.price}
+            onChange={event => setNewProduct({ ...newProduct, price: event.target.value })}
+            placeholder="Ціна"
+        />
+        <input
+            className="create-input number-input"
+            type="number"
+            value={newProduct.quantity}
+            onChange={event => setNewProduct({ ...newProduct, quantity: event.target.value })}
+            onKeyDown={e => {
+                if (e.key === 'Enter') {
+                    setQuantityFocus();
+                    confirmCreateProduct(newProduct);
+                }
+            }}
+            ref={quantityFocus}
+            placeholder="Кільк."
+        />
+        <UseAnimations
+            animation={download}
+            size={40}
+            strokeColor="white"
+            fillColor="white"
+            onClick={() => confirmCreateProduct(newProduct)}
+            className="clickable"
+        />
     </div>;
 };
 

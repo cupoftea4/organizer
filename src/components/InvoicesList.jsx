@@ -21,9 +21,9 @@ const InvoicesList = ({ invoices, fetchData, updateInvoices, onRowUpdate, select
     }, [invoices]);
 
     return (
-        <div className="table-div">
+        <>
             <CreateInvoice shops={shops} updateInvoices={updateInvoices}  />
-            <table>
+            <table className='invoices-list'>
                 <thead>
                     <tr>
                         <th>№</th>
@@ -45,7 +45,7 @@ const InvoicesList = ({ invoices, fetchData, updateInvoices, onRowUpdate, select
                     />)}
                 </tbody>
             </table>
-        </div>
+        </>
     );
 };
 

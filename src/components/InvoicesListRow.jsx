@@ -24,12 +24,10 @@ const InvoicesListRow = ({ invoice, shops, updateInvoice, updateInvoices, select
     const options = {
         render: (message, onConfirm, onCancel) => {
             return (
-                <div className="confirm-container">
-                    <div>
-                        <p> {message} {"?"} </p>
-                        <button onClick={onConfirm} className="agree-button"> Так </button>
-                        <button onClick={onCancel} className="disagree-button"> Ні </button>
-                    </div>
+                <div className="center-container">
+                    <p> {message}{"?"} </p>
+                    <button onClick={onConfirm} className="primary-button red"> Так </button>
+                    <button onClick={onCancel} className="primary-button"> Ні </button>
                 </div>
             );
         }
@@ -57,6 +55,7 @@ const InvoicesListRow = ({ invoice, shops, updateInvoice, updateInvoices, select
                 <UseAnimations
                     animation={trash}
                     onClick={deleteRow}
+                    className="clickable"
                 />
             </td>
         </tr>

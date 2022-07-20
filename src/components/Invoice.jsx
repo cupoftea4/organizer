@@ -23,7 +23,7 @@ const Invoice = ({ rows, fetchData, onRowUpdate, id }) => {
                 <tbody>
                     <tr>
                         <th></th>
-                        <th>Назва товару</th>
+                        <th colSpan="2">Назва товару</th>
                         <th>Ціна, грн.</th>
                         <th>Кiльк.</th>
                         <th>Сума, грн.</th>
@@ -38,16 +38,16 @@ const Invoice = ({ rows, fetchData, onRowUpdate, id }) => {
                                 fetchData={fetchData} 
                                 onRowUpdate={onRowUpdate} 
                                 invoiceId={id}  
-                            />
+                                />
                     })}
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th id="total" colSpan="4">Разом, грн: </th>
-                        <td><b>{total}</b></td>
+                        <th id="total" colSpan="5" className='right-align'>Разом, грн: </th>
+                        <td className='right-align'><b>{total}</b></td>
                         <td colSpan="2">
                             <a href={'http://my.com/print.php?id=' + id} rel="noreferrer" target="_blank" >
-                                <input className="print-btn" type="button" value="Друкувати"/> 
+                                <input className="primary-button clickable" type="button" value="Друкувати"/> 
                             </a>
                         </td>
                     </tr>

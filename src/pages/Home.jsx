@@ -1,5 +1,6 @@
 import React from 'react';
 import Tables from '../components/Tables';
+import { Link } from 'react-router-dom';
 import './Home.css';
 
 /****************************************
@@ -21,11 +22,14 @@ TODO:
 
 function Home() {
   return (
-    <div className="home">
-      <Tables />
-    </div>
-  )
+    <>
+      <div className="right-top">
+        <Link className="primary-button" to="/products">Пробити товар</Link>
+      </div> 
+      <Tables/>
+    </>
+  );
 }
 
-export default Home  
+export default Home;
 

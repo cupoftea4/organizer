@@ -28,12 +28,10 @@ const InvoiceRow = ({ row, id = 0, fetchData, onRowUpdate, invoiceId }) => {
     const options = {
         render: (message, onConfirm, onCancel) => {
             return (
-                <div className="confirm-container">
-                    <div>
-                        <p> {message} <b> {name} </b> {"?"} </p>
-                        <button onClick={onConfirm} className="agree-button"> Так </button>
-                        <button onClick={onCancel} className="disagree-button"> Ні </button>
-                    </div>
+                <div className="center-container">
+                    <p> {message} <b>{name}</b>{"?"} </p>
+                    <button onClick={onConfirm} className="primary-button red"> Так </button>
+                    <button onClick={onCancel} className="primary-button"> Ні </button>
                 </div>
             );
         }
@@ -51,7 +49,7 @@ const InvoiceRow = ({ row, id = 0, fetchData, onRowUpdate, invoiceId }) => {
             <td>
                 {id}
             </td>
-            <td>
+            <td colSpan="2">
                 <GoodsDatalist 
                     id={row.id} 
                     value={name}
@@ -61,10 +59,10 @@ const InvoiceRow = ({ row, id = 0, fetchData, onRowUpdate, invoiceId }) => {
                     }} 
                     onInput={value => setName(value)}
                     fetchData={fetchData}
-                    inputClassName="name-input"
                 />
             </td>
             <td><input
+                className='right-align'
                 type="text"
                 value={price}
                 onChange={event => setPrice(event.target.value)}
@@ -72,18 +70,19 @@ const InvoiceRow = ({ row, id = 0, fetchData, onRowUpdate, invoiceId }) => {
                 title={"Оптова ціна: " + row.optPrice}
             /></td>
             <td><input
+                className='right-align'
                 type="text"
                 value={quantity}
                 onChange={event => setQuantity(event.target.value)}
                 onBlur={() => updateInvoice({ key: "kilkist", property: quantity, barcode })}
             /></td>
-            <td>{sum}</td>
+            <td className='right-align'>{sum}</td>
             <td>{barcode}</td>
             <td>
                 <UseAnimations
                     animation={trash}
                     onClick={deleteRow}
-                    className="anim-btn"
+                    className="icon-button clickable"
                 />
             </td>
         </tr>

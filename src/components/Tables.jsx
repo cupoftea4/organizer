@@ -80,26 +80,23 @@ const Tables = () => {
     }
 
     return (
-        <div>
-            {dataStatus === 'resolved' && 
-            <>
-                <div className="select-date-div">
-                    <SelectDate dates={dates} onYearChange={onYearChange} selectedDate={selectedDate} onMonthChange={onMonthChange}/>
-                </div>
-                <div id="tables">
-                    <InvoicesList invoices={invoices} fetchData={fetchData} updateInvoices={handleInvoicesUpdate} onRowUpdate={handleRowUpdate} selectedInvoiceId={selectedInvoiceId} setSelectedInvoiceId={setSelectedInvoiceId} />
+        <>
+            {dataStatus === 'resolved' ? 
+                <div className="tables">
+                    <div className='table-div'>
+                        <SelectDate dates={dates} onYearChange={onYearChange} selectedDate={selectedDate} onMonthChange={onMonthChange}/>
+                        <InvoicesList invoices={invoices} fetchData={fetchData} updateInvoices={handleInvoicesUpdate} onRowUpdate={handleRowUpdate} selectedInvoiceId={selectedInvoiceId} setSelectedInvoiceId={setSelectedInvoiceId} />
+                    </div>
                     <Invoice rows={invoiceRows} fetchData={fetchData} onRowUpdate={handleRowUpdate} id={selectedInvoiceId} />
+                </div> : 
+            dataStatus === 'pending' ? 
+                <div className='center-container'>Підгружаю таблиці...</div> 
+                : 
+                <div className='center-container error'>Сталася помилка. Перевірте підключення до інтернету або зверніться до власника.
+                    <button className="primary-button" onClick={() => window.location.reload(false)}>Перезагрузити</button>
                 </div>
-            </> }
-            {dataStatus === 'pending' && <div className='status loading'>Loading...</div> }
-            {dataStatus === 'rejected' && 
-                <div className='status error'>
-                    <div className='loader'>
-                    <div/>
-                    Error
-                </div>
-            </div> }
-        </div>
+            }
+        </>
     )
 }
 

@@ -11,22 +11,22 @@ const CreateInvoice = ({ shops, updateInvoices }) => {
     };
     
   return (
-    <div className="create-row create-invoice" >
+    <div className="green-box" >
         <select 
             onChange={e => setNewInvoice({...newInvoice, shop: e.target.value })}
-            className="choose-input select shop"
+            className="create-input"
         >
             {shops.map((shop, i) => <option value={shop.id} key={i}>{shop.name}</option>)}
         </select>
         <input type="date"
             value={newInvoice.date}
             onChange={e => setNewInvoice({...newInvoice, date: e.target.value })}
-            className="choose-input date" 
+            className="create-input" 
         />
         <input 
             type="text"
             onChange={e => setNewInvoice({...newInvoice, note: e.target.value })}
-            className="choose-input note"  
+            className="create-input"  
             placeholder="Примітка" 
         />
         <UseAnimations
@@ -35,7 +35,7 @@ const CreateInvoice = ({ shops, updateInvoices }) => {
             strokeColor="white"
             fillColor="white"
             onClick={createInvoice}
-            className="anim-btn"
+            className="clickable"
          />
     </div>
   )
