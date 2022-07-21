@@ -6,11 +6,11 @@
     height: 6rem;
 }
 
-table td {
+.products-table td {
     width: unset;
 }
 
-table {
+.products-table {
     width: 70vw;
     margin: 0 auto;
     margin-top: 1rem;

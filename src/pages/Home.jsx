@@ -6,7 +6,8 @@ import { GroupsContext } from '../Contexts';
 import { fetchData } from '../fetchData'
 
 /****************************************
-TODO: 
+TODO:
+  - fix task and name appearance in products after "CreateInvoiceRow" 
   - Fix shops state change on every "InvoicesList" component render
   - fix null group when unexisting barcode is entered
   - fix multiple products with same id_tovar

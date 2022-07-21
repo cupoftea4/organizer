@@ -28,7 +28,7 @@ const Products = () => {
 
   return (
     <div>
-      <table>
+      <table className='products-table'>
         <thead>
             <tr>
                 <th>№</th>
