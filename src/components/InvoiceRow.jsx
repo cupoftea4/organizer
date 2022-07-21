@@ -4,7 +4,7 @@ import trash from 'react-useanimations/lib/trash';
 import { confirm } from "react-confirm-box";
 import GoodsDatalist from './GoodsDatalist';
 
-const InvoiceRow = ({ row, id = 0, fetchData, onRowUpdate, invoiceId }) => {
+const InvoiceRow = ({ row, id = 0, onRowUpdate, invoiceId }) => {
     const [quantity, setQuantity] = useState(row.quantity);
     const [price, setPrice] = useState(row.price);
     const [barcode, setBarcode] = useState(row.barcode);
@@ -58,7 +58,6 @@ const InvoiceRow = ({ row, id = 0, fetchData, onRowUpdate, invoiceId }) => {
                         updateInvoice({ key: "product-changed", price: product.price,  id_tovar: product.id_tovar });
                     }} 
                     onInput={value => setName(value)}
-                    fetchData={fetchData}
                 />
             </td>
             <td><input

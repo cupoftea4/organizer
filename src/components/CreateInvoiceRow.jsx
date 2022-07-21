@@ -3,8 +3,9 @@ import UseAnimations from 'react-useanimations';
 import download from 'react-useanimations/lib/download';
 import { confirm } from "react-confirm-box";
 import GoodsDatalist from './GoodsDatalist';
+import { fetchData } from '../fetchData';
 
-const CreateInvoiceRow = ({ groups, fetchData, onRowUpdate, invoiceId }) => {
+const CreateInvoiceRow = ({ groups, onRowUpdate, invoiceId = 0 }) => {
     const [newProduct, setNewProduct] = useState({ id_tovar: 0, name: "", price: "", optPrice: "", quantity: "", group: 1, barcode: "" });
 
     // eslint-disable-next-line
@@ -94,7 +95,8 @@ const CreateInvoiceRow = ({ groups, fetchData, onRowUpdate, invoiceId }) => {
                 if (e.key === 'Enter') {
                     setQuantityFocus();
                     fetchData({ task: "select-product", barcode: e.target.value })
-                        .then(product => {
+                        .then(({data:product, dataStatus}) => {
+                            if (dataStatus !== "resolved") return;
                             if (!product) {
                                 setNewProduct({id_tovar: 0, barcode: e.target.value});
                             } else {

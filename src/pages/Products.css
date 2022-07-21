@@ -1,6 +1,25 @@
 .bottom-panel  {
-    position: absolute;
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, 0);
     bottom: 0;
     height: 6rem;
 }
 
+table td {
+    width: unset;
+}
+
+table {
+    width: 70vw;
+    margin: 0 auto;
+    margin-top: 1rem;
+}
+
+.datalist-input .datalist-items {
+  top: unset;
+  bottom: 100%;
+  height: 25rem;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}

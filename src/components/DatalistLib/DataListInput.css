@@ -11,6 +11,11 @@
   padding: .5rem;
 }
 
+.datalist-input .dropdownItem:hover {
+  background-color: var(--primary-clr);
+  cursor: pointer;
+}
+
 .datalist-input .autocomplete-input {
   width: 100%;
 }
@@ -22,7 +27,8 @@
   /*position the autocomplete items to be the same width as the container:*/
   top: 100%;
   left: 0;
-  right: 0;
+  right: 0; 
+
 }
 
 .datalist-input .default-datalist-items {

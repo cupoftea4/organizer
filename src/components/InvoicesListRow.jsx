@@ -7,6 +7,7 @@ import { confirm } from "react-confirm-box";
 const InvoicesListRow = ({ invoice, shops, updateInvoice, updateInvoices, selectedRowId, setSelectedRowId }) => {
     // console.log(invoice);
     const [ note, setNote ] = useState(invoice.note);
+    // console.log(shops, shops.find(shop => shop.id === invoice.tochka)?.name);
 
     useEffect(() => {
         setNote(invoice.note);
@@ -43,7 +44,7 @@ const InvoicesListRow = ({ invoice, shops, updateInvoice, updateInvoices, select
         >
             <td><b>{invoice.id}</b></td>
             <td>{invoice.date}</td>
-            <td>{shops.find(shop => shop.id === invoice.tochka).name}</td>
+            <td>{shops.find(shop => shop.id === invoice.tochka)?.name ?? "не знайдено"}</td>
             <td><input type="text" 
                 value={note ?? ""}
                 title={note ?? ""}

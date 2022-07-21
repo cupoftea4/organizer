@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { useTransition } from 'react';
 import DataListInput from "./DatalistLib/DataListInput";
+import { fetchData } from '../fetchData';
 
-const GoodsDatalist = ({ id = 0, value, onInput, onSelect, fetchData, inputClassName}) => {
+const GoodsDatalist = ({ id = 0, value, onInput, onSelect, inputClassName}) => {
     const [startTransition] = useTransition();
     const [goods, setGoods] = useState([]);
     const [isMounted, setIsMounted] = useState(false);
@@ -21,7 +22,11 @@ const GoodsDatalist = ({ id = 0, value, onInput, onSelect, fetchData, inputClass
     );
 
     const searchGoods = (property) => {
-        fetchData({ task: "find-goods", property }).then(setGoods);            
+        fetchData({ task: "find-goods", property })
+        .then(({ data:goods, dataStatus }) => {
+                if (dataStatus !== 'resolved') return;
+                setGoods(goods);
+            });            
     }
 
     const items = useMemo(
