@@ -1,7 +1,90 @@
-.home {
+.green-box {
+	background-color: var(--primary-clr);
+	padding: .75rem;
 	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 0.5rem;
+	border-radius: .75rem;
 }
 
+.create-input {
+	border-radius: 0.5rem;
+	border: 3px solid var(--dark-primary-clr);
+	padding: .1rem .25rem;
+	width: 8rem;
+}
+
+.number-input {
+	width: 10%;
+}
+
+.name-input {
+	width: 40%;
+}
+
+table tr td:first-child, td:last-child {
+	max-width: 2rem;
+	text-align: center;
+}
+
+.invoice tr:nth-child(even){
+	background-color: var(--gray-400);
+}
+
+.tables {
+	padding: 2rem;
+	display: flex;
+	gap: 2rem;
+}
+
+.table-div {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
+}
+
+.table-div table {
+	width: 100%;
+}
+
+.invoices-list tbody tr:hover, .selected-row {
+	background-color: var(--dark-primary-clr);
+	color: var(--secondary-clr);
+	stroke: var(--secondary-clr);
+	cursor: pointer;
+} 
+
+.right-top {
+	position: absolute;
+	top: 1rem;
+	right: 2rem;
+}
+
+
+@media screen and (max-width: 60rem) {
+	.tables {
+		flex-direction: column;
+	}
+}
+
+@media screen and (max-width: 30rem) {
+	.green-box {
+		flex-direction: column;
+
+	}
+	.green-box .create-input {
+		width: 10rem;
+		
+	}
+	.table-div {
+		align-items: center;
+	}
+}
+	
+
+/*
 #invoice-table tr:nth-child(even){background-color: #f2f2f2;}
   
 table tbody tr:hover {
@@ -256,4 +339,4 @@ button {
 	border-radius: .75rem;
 }	
 
-
+ */

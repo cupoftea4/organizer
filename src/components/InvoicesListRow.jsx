@@ -7,6 +7,7 @@ import { confirm } from "react-confirm-box";
 const InvoicesListRow = ({ invoice, shops, updateInvoice, updateInvoices, selectedRowId, setSelectedRowId }) => {
     // console.log(invoice);
     const [ note, setNote ] = useState(invoice.note);
+    // console.log(shops, shops.find(shop => shop.id === invoice.tochka)?.name);
 
     useEffect(() => {
         setNote(invoice.note);
@@ -24,12 +25,10 @@ const InvoicesListRow = ({ invoice, shops, updateInvoice, updateInvoices, select
     const options = {
         render: (message, onConfirm, onCancel) => {
             return (
-                <div className="confirm-container">
-                    <div>
-                        <p> {message} {"?"} </p>
-                        <button onClick={onConfirm} className="agree-button"> Так </button>
-                        <button onClick={onCancel} className="disagree-button"> Ні </button>
-                    </div>
+                <div className="center-container">
+                    <p> {message}{"?"} </p>
+                    <button onClick={onConfirm} className="primary-button red"> Так </button>
+                    <button onClick={onCancel} className="primary-button"> Ні </button>
                 </div>
             );
         }
@@ -45,7 +44,7 @@ const InvoicesListRow = ({ invoice, shops, updateInvoice, updateInvoices, select
         >
             <td><b>{invoice.id}</b></td>
             <td>{invoice.date}</td>
-            <td>{shops.find(shop => shop.id === invoice.tochka).name}</td>
+            <td>{shops.find(shop => shop.id === invoice.tochka)?.name ?? "не знайдено"}</td>
             <td><input type="text" 
                 value={note ?? ""}
                 title={note ?? ""}
@@ -57,6 +56,7 @@ const InvoicesListRow = ({ invoice, shops, updateInvoice, updateInvoices, select
                 <UseAnimations
                     animation={trash}
                     onClick={deleteRow}
+                    className="clickable"
                 />
             </td>
         </tr>

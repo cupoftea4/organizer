@@ -1,8 +1,19 @@
 .datalist-input {
   /*the container must be positioned relative:*/
   position: relative;
-  display: inline-block;
+  display: flex;
+  justify-content: center;
   width: 100%;
+}
+
+.datalist-input .dropdownItem {
+  background-color: #e9e9e9;
+  padding: .5rem;
+}
+
+.datalist-input .dropdownItem:hover {
+  background-color: var(--primary-clr);
+  cursor: pointer;
 }
 
 .datalist-input .autocomplete-input {
@@ -10,12 +21,14 @@
 }
 
 .datalist-input .datalist-items {
+  
   position: absolute;
   z-index: 99;
   /*position the autocomplete items to be the same width as the container:*/
   top: 100%;
   left: 0;
-  right: 0;
+  right: 0; 
+
 }
 
 .datalist-input .default-datalist-items {
@@ -42,8 +55,10 @@
 }
 
 .datalist-input .datalist-active-item-default {
-  background-color: DodgerBlue;
+  background-color: var(--dark-primary-clr);
   /* color: #ffffff; */
   border-bottom: 1px solid #d4d4d4;
   padding: 10px;
 }
+
+

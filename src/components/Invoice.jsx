@@ -1,29 +1,22 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useMemo, useContext } from 'react';
 import InvoiceRow from './InvoiceRow';
 import CreateInvoiceRow from './CreateInvoiceRow';
+import {GroupsContext} from '../Contexts';
 
 
-const Invoice = ({ rows, fetchData, onRowUpdate, id }) => {
+const Invoice = ({ rows, onRowUpdate, id }) => {
     const total = useMemo(() => rows.reduce((acc, row) => acc + (row.price * row.quantity), 0).toLocaleString("en", {useGrouping: false, minimumFractionDigits: 2}), [rows]); 
-    const [groups, setGroups] = useState([{ id: 1, name: "" }]);
-
-    useEffect (
-        ()  =>  {
-            fetchData({task: "get-groups"})
-                .then(setGroups);
-        // eslint-disable-next-line      
-        }, []
-    );
+    const groups = useContext(GroupsContext);
 
     return (
         <div className="table-div invoice">
             <h2>Накладна №{id} <span style={{"fontSize": "14px"}}> Сума: {total}грн </span> </h2>
-            <CreateInvoiceRow groups={groups} fetchData={fetchData} onRowUpdate={onRowUpdate} invoiceId={id} />
+                <CreateInvoiceRow groups={groups} onRowUpdate={onRowUpdate} invoiceId={id} />
             <table>
                 <tbody>
                     <tr>
                         <th></th>
-                        <th>Назва товару</th>
+                        <th colSpan="2">Назва товару</th>
                         <th>Ціна, грн.</th>
                         <th>Кiльк.</th>
                         <th>Сума, грн.</th>
@@ -35,19 +28,18 @@ const Invoice = ({ rows, fetchData, onRowUpdate, id }) => {
                                 id={index+1} 
                                 row={row} 
                                 key={row.id} 
-                                fetchData={fetchData} 
                                 onRowUpdate={onRowUpdate} 
                                 invoiceId={id}  
-                            />
+                                />
                     })}
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th id="total" colSpan="4">Разом, грн: </th>
-                        <td><b>{total}</b></td>
+                        <th id="total" colSpan="5" className='right-align'>Разом, грн: </th>
+                        <td className='right-align'><b>{total}</b></td>
                         <td colSpan="2">
                             <a href={'http://my.com/print.php?id=' + id} rel="noreferrer" target="_blank" >
-                                <input className="print-btn" type="button" value="Друкувати"/> 
+                                <input className="primary-button clickable" type="button" value="Друкувати"/> 
                             </a>
                         </td>
                     </tr>
