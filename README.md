@@ -1,3 +1,1 @@
-OwO vs UwU
-UwU wins!
-OwO's owo...
+An organizer to edit invoices, add products to the list.
