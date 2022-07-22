@@ -7,6 +7,7 @@ import { fetchData } from '../fetchData'
 
 /****************************************
 TODO:
+  - a component is changing a controlled input to be uncontrolled. (while getting product by barcode in "CreateProductRow")
   - fix task and name appearance in products after "CreateInvoiceRow" 
   - Fix shops state change on every "InvoicesList" component render
   - fix null group when unexisting barcode is entered

@@ -6,7 +6,7 @@ import GoodsDatalist from './GoodsDatalist';
 import { fetchData } from '../fetchData';
 
 const CreateInvoiceRow = ({ groups, onRowUpdate, invoiceId = 0 }) => {
-    const [newProduct, setNewProduct] = useState({ id_tovar: 0, name: "", price: "", optPrice: "", quantity: "", group: 1, barcode: "" });
+    const [newProduct, setNewProduct] = useState({ id_tovar: 0, name: "", price: "", optPrice: "", quantity: 1, group: 1, barcode: "" });
 
     // eslint-disable-next-line
     const useMountEffect = (fun) => useEffect(fun, []);
@@ -21,7 +21,7 @@ const CreateInvoiceRow = ({ groups, onRowUpdate, invoiceId = 0 }) => {
     const [quantityFocus, setQuantityFocus] = useFocus();
     useMountEffect(setBarcodeFocus);
 
-    const resetNewProduct = group => setNewProduct({ id_tovar: 0, name: "", price: "", quantity: "", barcode: "",  optPrice: "", group });
+    const resetNewProduct = group => setNewProduct({ id_tovar: 0, name: "", price: "", quantity: 1, barcode: "",  optPrice: "", group });
     const confirmCreateProduct = async (product) => {
         if (!product.group) {
             const result = await confirm("OБЕРЕЖНО! Група цього товару 0. Продовжити?", options);
@@ -98,10 +98,11 @@ const CreateInvoiceRow = ({ groups, onRowUpdate, invoiceId = 0 }) => {
                         .then(({data:product, dataStatus}) => {
                             if (dataStatus !== "resolved") return;
                             if (!product) {
-                                setNewProduct({id_tovar: 0, barcode: e.target.value});
+                                setNewProduct({...newProduct, id_tovar: 0, barcode: e.target.value});
                             } else {
-                                setNewProduct(product);
+                                setNewProduct({...newProduct, ...product});
                             }
+                            setNewProduct(prevProd => ({ ...prevProd, quantity: newProduct.quantity + 1 }));
                         });
                     }
                 }}
@@ -120,13 +121,13 @@ const CreateInvoiceRow = ({ groups, onRowUpdate, invoiceId = 0 }) => {
                 inputClassName="create-input" 
             />
         </div>
-        <input
+        {invoiceId !== 0 && <input
             className="create-input number-input"
             type="number"
             value={newProduct.optPrice}
             onChange={event => setNewProduct({ ...newProduct, optPrice: event.target.value })}
             placeholder="Ціна опт   "
-        />
+        />}
         <input
             className="create-input number-input"
             type="number"

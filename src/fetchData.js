@@ -10,11 +10,9 @@ export const fetchData = async (changes = {}) => {
         })
         if (response.ok) dataStatus = 'resolved';
         else dataStatus = 'rejected';
-        // console.log(response.status, dataStatus);
         data = await response.json();
     } catch (error) {
         dataStatus = 'error';
     }
-    // console.log(changes, data, dataStatus);
     return {data, dataStatus};
 }
