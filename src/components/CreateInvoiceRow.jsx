@@ -102,7 +102,6 @@ const CreateInvoiceRow = ({ groups, onRowUpdate, invoiceId = 0 }) => {
                             } else {
                                 setNewProduct({...newProduct, ...product});
                             }
-                            setNewProduct(prevProd => ({ ...prevProd, quantity: newProduct.quantity + 1 }));
                         });
                     }
                 }}
@@ -146,6 +145,7 @@ const CreateInvoiceRow = ({ groups, onRowUpdate, invoiceId = 0 }) => {
                     confirmCreateProduct(newProduct);
                 }
             }}
+            onFocus={e => e.target.select()}
             ref={quantityFocus}
             placeholder="Кільк."
         />
