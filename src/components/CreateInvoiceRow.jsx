@@ -102,7 +102,6 @@ const CreateInvoiceRow = ({ groups, onRowUpdate, invoiceId = 0 }) => {
                             } else {
                                 setNewProduct({...newProduct, ...product});
                             }
-                            setNewProduct(prevProd => ({ ...prevProd, quantity: newProduct.quantity + 1 }));
                         });
                     }
                 }}
