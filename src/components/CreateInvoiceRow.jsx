@@ -145,6 +145,7 @@ const CreateInvoiceRow = ({ groups, onRowUpdate, invoiceId = 0 }) => {
                     confirmCreateProduct(newProduct);
                 }
             }}
+            onFocus={e => e.target.select()}
             ref={quantityFocus}
             placeholder="Кільк."
         />
