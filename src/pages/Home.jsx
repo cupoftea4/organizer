@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import Tables from '../components/Tables';
 import { Link } from 'react-router-dom';
 import './Home.css';
-import { GroupsContext } from '../Contexts';
+import { GroupsContext } from '../contexts';
 import { fetchData } from '../fetchData'
 
 /****************************************

@@ -3,7 +3,7 @@ import './Products.css'
 import ProductsRow from '../components/ProductsRow';
 import AddProduct from '../components/AddProduct';
 import { fetchData } from '../fetchData'
-import useLocalStorage from '../useLocalStorage';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 const Products = () => {
   const [products, setProducts] = useLocalStorage('products', [{ id_tovar: 1, name: "hhhet", price: 2, quantity: 3, barcode: "013928274973" }]);
@@ -24,6 +24,13 @@ const Products = () => {
   const deleteRow = id => {
     console.log(products, id);
     setProducts(products.filter(product => product.id_tovar !== id));
+  };
+
+  const saveProducts = () => {
+    fetchData({
+        task: "save-products", 
+        products: products.map(product => ({id_tovar: product.id_tovar, price: product.price, quantity: product.quantity})),
+      }).then(({data, dataStatus}) => console.log(data, dataStatus));
   };
 
   return (
@@ -47,14 +54,14 @@ const Products = () => {
               <tr>
                   <th id="total" colSpan="5" className='right-align'>Разом, грн: </th>
                   <td className='right-align'><b>{total}</b></td>
-                  <td colSpan="2">
-                  </td>
+                  <td colSpan="2"></td>
               </tr>
           </tfoot>
       </table>
       <AddProduct groups={groups} setProducts={setProducts}/>
+      <button className="primary-button save-products-btn" onClick={saveProducts}>Зберегти</button>
     </div>
   )
-}
+};
 
-export default Products 
+export default Products;

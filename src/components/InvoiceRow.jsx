@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import UseAnimations from 'react-useanimations';
 import trash from 'react-useanimations/lib/trash';
 import { confirm } from "react-confirm-box";
+import { confirmOptions } from '../options-box';
 import GoodsDatalist from './GoodsDatalist';
 
 const InvoiceRow = ({ row, id = 0, onRowUpdate, invoiceId }) => {
@@ -19,23 +20,11 @@ const InvoiceRow = ({ row, id = 0, onRowUpdate, invoiceId }) => {
     }, [row]);
 
     const deleteRow = async () => {
-        const result = await confirm("Ви впевнені, що хочете видалити з цієї накладної ", options);
+        const result = await confirm({msg: "Ви впевнені, що хочете видалити з цієї накладної ", name}, confirmOptions);
         if (result) {
             onRowUpdate({ task: "delete-row", id: row.id, id_nakladni: invoiceId })
         }
     };
-
-    const options = {
-        render: (message, onConfirm, onCancel) => {
-            return (
-                <div className="center-container">
-                    <p> {message} <b>{name}</b>{"?"} </p>
-                    <button onClick={onConfirm} className="primary-button red"> Так </button>
-                    <button onClick={onCancel} className="primary-button"> Ні </button>
-                </div>
-            );
-        }
-    }
 
     const updateInvoice = (product) => onRowUpdate({
         task: 'update-invoice',
@@ -85,6 +74,7 @@ const InvoiceRow = ({ row, id = 0, onRowUpdate, invoiceId }) => {
                 />
             </td>
         </tr>
-    );
-}
+    )
+};
+
 export default InvoiceRow;

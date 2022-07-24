@@ -60,7 +60,7 @@ const Tables = () => {
             if (dataStatus !== 'resolved') return;
             setInvoices(invoices);
         });
-    }
+    };
 
     const onYearChange = year => {
         setDataStatus('pending');
@@ -71,7 +71,7 @@ const Tables = () => {
                 setDates({...dates, months}); 
                 onMonthChange((months.includes(selectedDate.month))?selectedDate.month:months[0], year)
             });
-    }
+    };
 
     const onMonthChange = (month, year) => {
         setSelectedDate({ month, year });
@@ -86,7 +86,7 @@ const Tables = () => {
                 if (dataStatus !== 'resolved') return;
                 setInvoices(invoices);
             });
-    }
+    };
 
     return (
         <>
@@ -107,6 +107,6 @@ const Tables = () => {
             }
         </>
     )
-}
+};
 
 export default Tables;

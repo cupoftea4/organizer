@@ -39,6 +39,6 @@ const CreateInvoice = ({ shops, updateInvoices }) => {
          />
     </div>
   )
-}
+};
 
-export default CreateInvoice
+export default CreateInvoice;

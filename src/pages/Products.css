@@ -2,8 +2,13 @@
     position: fixed;
     left: 50%;
     transform: translate(-50%, 0);
-    bottom: 0;
-    height: 6rem;
+    bottom: 2rem;
+    opacity: 0.4;
+    transition: opacity .3s ease-in-out;
+}
+
+.bottom-panel:hover {
+    opacity: 1;
 }
 
 .products-table td {
@@ -22,4 +27,12 @@
   height: 25rem;
   overflow-y: scroll;
   overflow-x: hidden;
+}
+
+.save-products-btn {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    height: 4rem;
+    width: 10rem;
 }

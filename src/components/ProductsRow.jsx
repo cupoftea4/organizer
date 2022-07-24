@@ -24,6 +24,6 @@ const ProductsRow = ({product, deleteRow, id}) => {
       </td>
     </tr>
   )
-}
+};
 
-export default ProductsRow
+export default ProductsRow;

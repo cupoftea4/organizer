@@ -2,12 +2,11 @@ import React, { useState, useEffect } from 'react';
 import UseAnimations from 'react-useanimations';
 import trash from 'react-useanimations/lib/trash';
 import { confirm } from "react-confirm-box";
+import { confirmOptions } from '../options-box';
 
 
 const InvoicesListRow = ({ invoice, shops, updateInvoice, updateInvoices, selectedRowId, setSelectedRowId }) => {
-    // console.log(invoice);
     const [ note, setNote ] = useState(invoice.note);
-    // console.log(shops, shops.find(shop => shop.id === invoice.tochka)?.name);
 
     useEffect(() => {
         setNote(invoice.note);
@@ -15,24 +14,12 @@ const InvoicesListRow = ({ invoice, shops, updateInvoice, updateInvoices, select
 
     const updateNote = () => updateInvoices({ task: "update-invoice-list", id: invoice.id, note });
     const deleteRow = async () => {
-        const result = await confirm("Ви впевнені, що хочете видалити цю накладну", options);
+        const result = await confirm({msg: "Ви впевнені, що хочете видалити цю накладну"}, confirmOptions);
         if (result) {
             updateInvoices({ task: "delete-invoice", id: invoice.id});
             setSelectedRowId(0);
         }
     };
-
-    const options = {
-        render: (message, onConfirm, onCancel) => {
-            return (
-                <div className="center-container">
-                    <p> {message}{"?"} </p>
-                    <button onClick={onConfirm} className="primary-button red"> Так </button>
-                    <button onClick={onCancel} className="primary-button"> Ні </button>
-                </div>
-            );
-        }
-    }
 
     return (
         <tr
@@ -60,7 +47,7 @@ const InvoicesListRow = ({ invoice, shops, updateInvoice, updateInvoices, select
                 />
             </td>
         </tr>
-    );
+    )
 };
 
 export default InvoicesListRow;
