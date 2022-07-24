@@ -15,7 +15,7 @@ const SelectDate = ({dates, onYearChange, selectedDate, onMonthChange}) => {
                 { dates.months.map(month => <option value={month} key={month} >{monthsNames.current[month-1]}</option>) }
             </select>
         </div>
-    );
+    )
 }; 
 
 export default SelectDate;

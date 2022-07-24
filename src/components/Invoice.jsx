@@ -1,7 +1,7 @@
 import React, { useMemo, useContext } from 'react';
 import InvoiceRow from './InvoiceRow';
 import CreateInvoiceRow from './CreateInvoiceRow';
-import {GroupsContext} from '../Contexts';
+import {GroupsContext} from '../contexts';
 
 
 const Invoice = ({ rows, onRowUpdate, id }) => {
@@ -47,6 +47,6 @@ const Invoice = ({ rows, onRowUpdate, id }) => {
             </table>
         </div>
     )
-}
+};
 
 export default Invoice;

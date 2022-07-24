@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import UseAnimations from 'react-useanimations';
 import download from 'react-useanimations/lib/download';
 import { confirm } from "react-confirm-box";
+import { confirmOptions } from '../options-box';
+import { warningOptions } from '../options-box';
 import GoodsDatalist from './GoodsDatalist';
 import { fetchData } from '../fetchData';
 
@@ -24,11 +26,11 @@ const CreateInvoiceRow = ({ groups, onRowUpdate, invoiceId = 0 }) => {
     const resetNewProduct = group => setNewProduct({ id_tovar: 0, name: "", price: "", quantity: 1, barcode: "",  optPrice: "", group });
     const confirmCreateProduct = async (product) => {
         if (!product.group) {
-            const result = await confirm("OБЕРЕЖНО! Група цього товару 0. Продовжити?", options);
+            const result = await confirm({msg: "OБЕРЕЖНО! Група цього товару 0. Продовжити?"}, confirmOptions);
             if (!result) return;
         }
-        if (!parseFloat(product.price) || !parseFloat(product.optPrice) || !product.name || !parseInt(product.quantity)) {
-            await confirm("OБЕРЕЖНО! Не всі дані введено або введено неправильно. Товар НЕ буде додано.", warningOptions);
+        if (!parseFloat(product.price) || (invoiceId && !parseFloat(product.optPrice)) || !product.name || !parseInt(product.quantity)) {
+            await confirm({msg: "OБЕРЕЖНО! Не всі дані введено або введено неправильно. Товар НЕ буде додано."}, warningOptions);
             return;
         }
         let updateData = {
@@ -49,36 +51,13 @@ const CreateInvoiceRow = ({ groups, onRowUpdate, invoiceId = 0 }) => {
             setBarcodeFocus();
             return;
         }
-        const result = await confirm("Ви впевнені, що хочете створити і додати до накладної товар", options);
+        const result = await confirm({msg: "Ви впевнені, що хочете створити і додати до накладної товар ", name: newProduct.name}, confirmOptions);
         if (result) {
             onRowUpdate({ ...updateData, id_tovar: 0 });
             resetNewProduct(product.group);
             setBarcodeFocus();
         }
     };
-
-    const options = {
-        render: (message, onConfirm, onCancel) => {
-            return ( 
-                <div className="center-container">
-                    <p> {message} <b>{newProduct.name}</b>{"?"} </p>
-                    <button onClick={onConfirm} className="primary-button red"> Так </button>
-                    <button onClick={onCancel} className="primary-button"> Ні </button>
-                </div>
-            );
-        }
-    }
-
-    const warningOptions = {
-        render: (message, onConfirm) => {
-            return ( 
-                <div className="center-container error">
-                    <p> {message} </p>
-                    <button onClick={onConfirm} className="primary-button"> Зрозуміло </button>
-                </div>
-            );
-        }
-    }
 
     return <div className="green-box" >
         <select value={newProduct.group} className="create-input" onChange={e => setNewProduct({ ...newProduct, group: e.target.value })}>
