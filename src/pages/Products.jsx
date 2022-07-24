@@ -30,7 +30,6 @@ const Products = () => {
     fetchData({
         task: "save-products", 
         products: products.map(product => ({id_tovar: product.id_tovar, price: product.price, quantity: product.quantity})),
-        date: new Date().toISOString()
       }).then(({data, dataStatus}) => console.log(data, dataStatus));
   };
 

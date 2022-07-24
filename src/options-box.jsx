@@ -14,7 +14,7 @@ export const warningOptions = {
     render: (message, onConfirm) => {
         return ( 
             <div className="center-container error">
-                <p> {message.msg} </p>
+                <p>{message.msg}</p>
                 <button onClick={onConfirm} className="primary-button"> Зрозуміло </button>
             </div>
         );

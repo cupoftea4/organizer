@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import UseAnimations from 'react-useanimations';
 import download from 'react-useanimations/lib/download';
 import { confirm } from "react-confirm-box";
@@ -6,22 +6,15 @@ import { confirmOptions } from '../options-box';
 import { warningOptions } from '../options-box';
 import GoodsDatalist from './GoodsDatalist';
 import { fetchData } from '../fetchData';
+import useFocus from '../hooks/useFocus';
 
 const CreateInvoiceRow = ({ groups, onRowUpdate, invoiceId = 0 }) => {
     const [newProduct, setNewProduct] = useState({ id_tovar: 0, name: "", price: "", optPrice: "", quantity: 1, group: 1, barcode: "" });
-
-    // eslint-disable-next-line
-    const useMountEffect = (fun) => useEffect(fun, []);
-    
-    const useFocus = () => {
-        const htmlElRef = useRef(null);
-        const setFocus = () => { htmlElRef.current && htmlElRef.current.focus() }
-        return [htmlElRef, setFocus]
-    }
-
     const [barcodeFocus, setBarcodeFocus] = useFocus();
     const [quantityFocus, setQuantityFocus] = useFocus();
-    useMountEffect(setBarcodeFocus);
+
+    // eslint-disable-next-line
+    useEffect(() => setBarcodeFocus(), []);
 
     const resetNewProduct = group => setNewProduct({ id_tovar: 0, name: "", price: "", quantity: 1, barcode: "",  optPrice: "", group });
     const confirmCreateProduct = async (product) => {
