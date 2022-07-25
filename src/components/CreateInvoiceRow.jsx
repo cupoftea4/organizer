@@ -44,11 +44,13 @@ const CreateInvoiceRow = ({ groups, onRowUpdate, invoiceId = 0 }) => {
             setBarcodeFocus();
             return;
         }
-        const result = await confirm({msg: "Ви впевнені, що хочете створити і додати до накладної товар ", name: newProduct.name}, confirmOptions);
-        if (result) {
-            onRowUpdate({ ...updateData, id_tovar: 0 });
-            resetNewProduct(product.group);
-            setBarcodeFocus();
+        if (invoiceId) {
+            const result = await confirm({msg: "Ви впевнені, що хочете створити і додати до накладної товар ", name: newProduct.name}, confirmOptions);
+            if (result) {
+                onRowUpdate({ ...updateData, id_tovar: 0 });
+                resetNewProduct(product.group);
+                setBarcodeFocus();
+            }
         }
     };
 

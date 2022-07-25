@@ -17,7 +17,6 @@ const InvoicesList = ({ invoices, updateInvoices, onRowUpdate, selectedInvoiceId
     }, []);
 
     useEffect(() => {
-        console.warn("invoicesList useEffect", isMounted, invoices);
         if (isMounted) {
             setSelectedInvoiceId(invoices[0]?.id);
             onRowUpdate({ task: "get-table", id: invoices[0]?.id })
