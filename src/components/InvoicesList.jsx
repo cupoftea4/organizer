@@ -1,29 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import CreateInvoice from './CreateInvoice';
 import InvoicesListRow from './InvoicesListRow';
+import { fetchData } from '../fetchData';
 
-const InvoicesList = ({ invoices, fetchData, updateInvoices, onRowUpdate, selectedInvoiceId, setSelectedInvoiceId }) => {
+const InvoicesList = ({ invoices, updateInvoices, onRowUpdate, selectedInvoiceId, setSelectedInvoiceId }) => {
     const [ shops, setShops ] = useState([{ id: 0, name: "" }]);
     const [isMounted, setIsMounted] = useState(false);
 
     useEffect(() => {
-        fetchData({task: "get-shops"}).then(setShops);
+        fetchData({task: "get-shops"})
+        .then(({data: shops, dataStatus}) => {
+            if (dataStatus !== 'resolved') return;
+            setShops(shops);
+        });
         // eslint-disable-next-line
     }, []);
 
     useEffect(() => {
-        if(isMounted) {
+        if (isMounted) {
             setSelectedInvoiceId(invoices[0]?.id);
             onRowUpdate({ task: "get-table", id: invoices[0]?.id })
         } else setIsMounted(true);
         // if(invoices.length == 0) 
+        return () => { setIsMounted(false) };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [invoices]);
 
     return (
-        <div className="table-div">
+        <>
             <CreateInvoice shops={shops} updateInvoices={updateInvoices}  />
-            <table>
+            <table className='invoices-list'>
                 <thead>
                     <tr>
                         <th>№</th>
@@ -34,7 +40,7 @@ const InvoicesList = ({ invoices, fetchData, updateInvoices, onRowUpdate, select
                     </tr>
                 </thead>
                 <tbody>
-                    {invoices.map(invoice => <InvoicesListRow
+                    {invoices?.map(invoice => <InvoicesListRow
                         invoice={invoice}
                         key={invoice.id}
                         shops={shops}
@@ -45,8 +51,13 @@ const InvoicesList = ({ invoices, fetchData, updateInvoices, onRowUpdate, select
                     />)}
                 </tbody>
             </table>
-        </div>
-    );
+        </>
+    )
 };
 
-export default InvoicesList;
+function invoiceListPropsAreEqual(prevMovie, nextMovie) {
+    return prevMovie.invoices === nextMovie.invoices
+      && prevMovie.selectedInvoiceId === nextMovie.selectedInvoiceId;
+}
+
+export default React.memo(InvoicesList, invoiceListPropsAreEqual);

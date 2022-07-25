@@ -2,9 +2,10 @@ import React, { useState, useEffect, useMemo } from 'react';
 import UseAnimations from 'react-useanimations';
 import trash from 'react-useanimations/lib/trash';
 import { confirm } from "react-confirm-box";
+import { confirmOptions } from '../options-box';
 import GoodsDatalist from './GoodsDatalist';
 
-const InvoiceRow = ({ row, id = 0, fetchData, onRowUpdate, invoiceId }) => {
+const InvoiceRow = ({ row, id = 0, onRowUpdate, invoiceId }) => {
     const [quantity, setQuantity] = useState(row.quantity);
     const [price, setPrice] = useState(row.price);
     const [barcode, setBarcode] = useState(row.barcode);
@@ -19,25 +20,11 @@ const InvoiceRow = ({ row, id = 0, fetchData, onRowUpdate, invoiceId }) => {
     }, [row]);
 
     const deleteRow = async () => {
-        const result = await confirm("Ви впевнені, що хочете видалити з цієї накладної ", options);
+        const result = await confirm({msg: "Ви впевнені, що хочете видалити з цієї накладної ", name}, confirmOptions);
         if (result) {
             onRowUpdate({ task: "delete-row", id: row.id, id_nakladni: invoiceId })
         }
     };
-
-    const options = {
-        render: (message, onConfirm, onCancel) => {
-            return (
-                <div className="confirm-container">
-                    <div>
-                        <p> {message} <b> {name} </b> {"?"} </p>
-                        <button onClick={onConfirm} className="agree-button"> Так </button>
-                        <button onClick={onCancel} className="disagree-button"> Ні </button>
-                    </div>
-                </div>
-            );
-        }
-    }
 
     const updateInvoice = (product) => onRowUpdate({
         task: 'update-invoice',
@@ -51,7 +38,7 @@ const InvoiceRow = ({ row, id = 0, fetchData, onRowUpdate, invoiceId }) => {
             <td>
                 {id}
             </td>
-            <td>
+            <td colSpan="2">
                 <GoodsDatalist 
                     id={row.id} 
                     value={name}
@@ -60,11 +47,10 @@ const InvoiceRow = ({ row, id = 0, fetchData, onRowUpdate, invoiceId }) => {
                         updateInvoice({ key: "product-changed", price: product.price,  id_tovar: product.id_tovar });
                     }} 
                     onInput={value => setName(value)}
-                    fetchData={fetchData}
-                    inputClassName="name-input"
                 />
             </td>
             <td><input
+                className='right-align'
                 type="text"
                 value={price}
                 onChange={event => setPrice(event.target.value)}
@@ -72,21 +58,23 @@ const InvoiceRow = ({ row, id = 0, fetchData, onRowUpdate, invoiceId }) => {
                 title={"Оптова ціна: " + row.optPrice}
             /></td>
             <td><input
+                className='right-align'
                 type="text"
                 value={quantity}
                 onChange={event => setQuantity(event.target.value)}
                 onBlur={() => updateInvoice({ key: "kilkist", property: quantity, barcode })}
             /></td>
-            <td>{sum}</td>
+            <td className='right-align'>{sum}</td>
             <td>{barcode}</td>
             <td>
                 <UseAnimations
                     animation={trash}
                     onClick={deleteRow}
-                    className="anim-btn"
+                    className="icon-button clickable"
                 />
             </td>
         </tr>
-    );
-}
+    )
+};
+
 export default InvoiceRow;
