@@ -12,6 +12,7 @@ export const fetchData = async (changes = {}) => {
         else dataStatus = 'rejected';
         data = await response.json();
     } catch (error) {
+        console.warn('error', error);
         dataStatus = 'error';
     }
     return {data, dataStatus};

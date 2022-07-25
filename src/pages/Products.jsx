@@ -6,7 +6,7 @@ import { fetchData } from '../fetchData'
 import useLocalStorage from '../hooks/useLocalStorage';
 
 const Products = () => {
-  const [products, setProducts] = useLocalStorage('products', [{ id_tovar: 1, name: "hhhet", price: 2, quantity: 3, barcode: "013928274973" }]);
+  const [products, setProducts] = useLocalStorage('products', []);
   const [groups, setGroups] = useState([]);
   const total = useMemo(() => products.reduce((acc, product) => acc + (product.price * product.quantity), 0).toLocaleString("en", {useGrouping: false, minimumFractionDigits: 2}), [products]); 
 
@@ -30,7 +30,10 @@ const Products = () => {
     fetchData({
         task: "save-products", 
         products: products.map(product => ({id_tovar: product.id_tovar, price: product.price, quantity: product.quantity})),
-      }).then(({data, dataStatus}) => console.log(data, dataStatus));
+      }).then(({dataStatus}) => {  
+        if (dataStatus === 'resolved') setProducts([]);
+      });
+
   };
 
   return (
@@ -60,6 +63,7 @@ const Products = () => {
       </table>
       <AddProduct groups={groups} setProducts={setProducts}/>
       <button className="primary-button save-products-btn" onClick={saveProducts}>Зберегти</button>
+      {!groups.length && <div className='center-container'>Підключення до серверу...</div>}
     </div>
   )
 };
