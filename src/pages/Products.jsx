@@ -43,10 +43,10 @@ const Products = () => {
             <tr>
                 <th>№</th>
                 <th colSpan={2}>Назва</th>
-                <th>Ціна, грн. </th>
-                <th>Кiльк. </th>
-                <th>Сума, грн. </th>
-                <th>Штрих-код	</th>
+                <th>Ціна, грн.</th>
+                <th>Кiльк.</th>
+                <th>Сума, грн.</th>
+                <th>Штрих-код</th>
                 <th></th>
             </tr>
           </thead>

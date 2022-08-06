@@ -26,8 +26,7 @@ TODO:
  
 *****************************************/
 
-
-function Home() {
+const Home = () => {
   const [groups, setGroups] = useState([{ id: 1, name: "" }]);
 
   useEffect (

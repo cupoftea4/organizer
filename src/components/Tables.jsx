@@ -12,7 +12,6 @@ const Tables = () => {
     const [selectedDate, setSelectedDate] = useState({ year: 2022, month: ''});
     const [dates, setDates] = useState({ years: [], months: []});
     const [dataStatus, setDataStatus] = useState('pending');
-    // console.warn(dataStatus, dates);
     
     useEffect(() => {
         getUptoDateInvoices();
@@ -81,7 +80,6 @@ const Tables = () => {
             date: (month + "-" + year)
         })
             .then(({data:invoices, dataStatus}) => {
-                // console.log(invoices, dataStatus);
                 setDataStatus(dataStatus);
                 if (dataStatus !== 'resolved') return;
                 setInvoices(invoices);
@@ -99,7 +97,7 @@ const Tables = () => {
                     <Invoice rows={invoiceRows} onRowUpdate={handleRowUpdate} id={selectedInvoiceId} />
                 </div> : 
             dataStatus === 'pending' ? 
-                <div className='center-container'>Підгружаю таблиці...</div> 
+                <div className='center-container'>Підвантажую таблиці...</div> 
                 : 
                 <div className='center-container error'>Сталася помилка. Перевірте підключення до інтернету або зверніться до власника.
                     <button className="primary-button" onClick={() => window.location.reload(false)}>Перезагрузити</button>

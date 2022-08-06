@@ -8,7 +8,7 @@ const InvoicesList = ({ invoices, updateInvoices, onRowUpdate, selectedInvoiceId
     const [isMounted, setIsMounted] = useState(false);
 
     useEffect(() => {
-        fetchData({task: "get-shops"})
+        fetchData({task: 'get-shops'})
         .then(({data: shops, dataStatus}) => {
             if (dataStatus !== 'resolved') return;
             setShops(shops);
@@ -19,7 +19,7 @@ const InvoicesList = ({ invoices, updateInvoices, onRowUpdate, selectedInvoiceId
     useEffect(() => {
         if (isMounted) {
             setSelectedInvoiceId(invoices[0]?.id);
-            onRowUpdate({ task: "get-table", id: invoices[0]?.id })
+            onRowUpdate({ task: 'get-table', id: invoices[0]?.id })
         } else setIsMounted(true);
         // if(invoices.length == 0) 
         return () => { setIsMounted(false) };
