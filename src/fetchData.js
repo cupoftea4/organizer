@@ -1,7 +1,9 @@
+const URL = 'http://my.com/';
+
 export const fetchData = async (changes = {}) => {
     let data, dataStatus = 'pending';
     try {
-        let response = await fetch("http://my.com/", {
+        let response = await fetch(URL, {
             method: 'POST',
             header: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -12,7 +14,7 @@ export const fetchData = async (changes = {}) => {
         else dataStatus = 'rejected';
         data = await response.json();
     } catch (error) {
-        console.warn('error', error);
+        // console.warn('error', error);
         dataStatus = 'error';
     }
     return {data, dataStatus};
