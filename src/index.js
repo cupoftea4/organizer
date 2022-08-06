@@ -12,9 +12,9 @@ ReactDOM.render(
   <React.StrictMode>
       <BrowserRouter>
         <Routes>
-          <Route path={`${path}`} element={<Home />} />
-          <Route path={`${path}/products`} element={<Products />} />
-          <Route path="*" element={<NoPage />} />
+          <Route path={`${path}`} element={<Home/>}/>
+          <Route path={`${path}/products`} element={<Products/>}/>
+          <Route path="*" element={<NoPage/>} />
         </Routes>
       </BrowserRouter>
     </React.StrictMode>,

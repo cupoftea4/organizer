@@ -7,7 +7,7 @@ const AddProduct = ({groups, setProducts}) => {
 
   const addProduct = async product => {
     if (!product.id_tovar) {
-      await confirm({msg: "OБЕРЕЖНО! Такого товару немає в базі. Товар НЕ буде додано."}, warningOptions);
+      await confirm({msg: 'OБЕРЕЖНО! Такого товару немає в базі. Товар НЕ буде додано.'}, warningOptions);
       return;
     }
     setProducts(prevProducts => {
