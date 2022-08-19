@@ -28,6 +28,7 @@ TODO:
 
 const Home = () => {
   const [groups, setGroups] = useState([{ id: 1, name: "" }]);
+  const path = window.location.pathname; 
 
   useEffect (
       ()  =>  {
@@ -43,7 +44,7 @@ const Home = () => {
   return (
     <>
         <div className="right-top">
-          <Link className="primary-button" to="/products" para={groups}>Пробити товар</Link>
+          <Link className="primary-button" to={`${path}/products`} para={groups}>Пробити товар</Link>
         </div> 
       <GroupsContext.Provider value={groups}>
         <Tables/>
