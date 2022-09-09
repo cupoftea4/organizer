@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import Tables from '../components/Tables';
-import { Link } from 'react-router-dom';
 import './Home.css';
 import { GroupsContext } from '../contexts';
 import { fetchData } from '../fetchData'
@@ -28,7 +27,6 @@ TODO:
 
 const Home = () => {
   const [groups, setGroups] = useState([{ id: 1, name: "" }]);
-  const path = window.location.pathname; 
 
   useEffect (
       ()  =>  {
@@ -43,9 +41,6 @@ const Home = () => {
 
   return (
     <>
-        <div className="right-top">
-          <Link className="primary-button" to={`${path}/products`} para={groups}>Пробити товар</Link>
-        </div> 
       <GroupsContext.Provider value={groups}>
         <Tables/>
       </GroupsContext.Provider>

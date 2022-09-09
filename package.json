@@ -8,6 +8,7 @@
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
+    "env-cmd": "^10.1.0",
     "react": "^18.2.0",
     "react-confirm-box": "^1.2.0",
     "react-datalist-input": "^2.2.1",
@@ -23,8 +24,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "build:beta": "env-cmd -f prod.env yarn run build"
   },
   "eslintConfig": {
     "extends": [
@@ -43,5 +43,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "main": "index.js",
+  "repository": "https://github.com/cupoftea4/organizer.git",
+  "author": "Amy <nadiia.telko.pz.2021@lpnu.ua>",
+  "license": "MIT"
 }

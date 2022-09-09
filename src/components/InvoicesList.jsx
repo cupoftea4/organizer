@@ -55,9 +55,9 @@ const InvoicesList = ({ invoices, updateInvoices, onRowUpdate, selectedInvoiceId
     )
 };
 
-function invoiceListPropsAreEqual(prevMovie, nextMovie) {
-    return prevMovie.invoices === nextMovie.invoices
-      && prevMovie.selectedInvoiceId === nextMovie.selectedInvoiceId;
+function invoiceListPropsAreEqual(prevList, nextList) {
+    return prevList.invoices === nextList.invoices
+      && prevList.selectedInvoiceId === nextList.selectedInvoiceId;
 }
 
 export default React.memo(InvoicesList, invoiceListPropsAreEqual);

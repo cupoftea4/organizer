@@ -1,4 +1,4 @@
-const URL = 'http://my.com/';
+const URL = process.env.REACT_APP_SERVER_URL;
 
 export const fetchData = async (changes = {}) => {
     let data, dataStatus = 'pending';
