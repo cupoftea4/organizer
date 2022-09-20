@@ -38,7 +38,7 @@ const Invoice = ({ rows, onRowUpdate, id }) => {
                         <th id="total" colSpan="5" className='right-align'>Разом, грн: </th>
                         <td className='right-align'><b>{total}</b></td>
                         <td colSpan="2">
-                            <a href={'http://my.com/print.php?id=' + id} rel="noreferrer" target="_blank" >
+                            <a href={`${process.env.REACT_APP_PRINT_PATH}?id=` + id} rel="noreferrer" target="_blank" >
                                 <input className="primary-button clickable" type="button" value="Друкувати"/> 
                             </a>
                         </td>
