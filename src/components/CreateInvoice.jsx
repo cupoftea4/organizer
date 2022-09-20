@@ -16,7 +16,7 @@ const CreateInvoice = ({ shops, updateInvoices }) => {
             onChange={e => setNewInvoice({...newInvoice, shop: e.target.value })}
             className="create-input"
         >
-            {shops.map((shop, i) => <option value={shop.id} key={i}>{shop.name}</option>)}
+            {shops && shops.map((shop, i) => <option value={shop.id} key={i}>{shop.name}</option>)}
         </select>
         <input type="date"
             value={newInvoice.date}

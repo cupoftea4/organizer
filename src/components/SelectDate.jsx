@@ -7,12 +7,12 @@ const SelectDate = ({dates, onYearChange, selectedDate, onMonthChange}) => {
         <div className="green-box">
             <select className="create-input" value={selectedDate.year}
                 onChange={e => onYearChange(e.target.value)}>
-                { dates.years.map(year => <option value={year} key={year} >{year}p.</option>) }
+                { dates.years && dates.years.map(year => <option value={year} key={year} >{year}p.</option>) }
             </select>
             <select className="create-input" value={selectedDate.month}
                 onChange={e => onMonthChange(e.target.value, selectedDate.year)}
             >
-                { dates.months.map(month => <option value={month} key={month} >{monthsNames.current[month-1]}</option>) }
+                { dates?.months && dates.months.map(month => <option value={month} key={month} >{monthsNames.current[month-1]}</option>) }
             </select>
         </div>
     )

@@ -347,7 +347,7 @@ const DataListInput = ({
   const renderItems = useCallback(
     () => (
       <>
-        {matchingItems.map((item, i) => {
+        {matchingItems && matchingItems.map((item, i) => {
           const isActive = focusIndex === i;
           const itemActiveClasses = isActive
             ? `datalist-active-item ${activeItemClassName ||

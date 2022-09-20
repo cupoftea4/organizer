@@ -56,7 +56,7 @@ const CreateInvoiceRow = ({ groups, onRowUpdate, invoiceId = 0 }) => {
 
     return <div className="green-box" >
         <select value={newProduct.group} className="create-input" onChange={e => setNewProduct({ ...newProduct, group: e.target.value })}>
-            {groups.map(group => <option value={group.id} key={group.id}>{group.name}</option>)}
+            {groups && groups?.map(group => <option value={group.id} key={group.id}>{group.name}</option>)}
         </select>
         <input
             className="create-input"

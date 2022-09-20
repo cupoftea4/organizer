@@ -23,7 +23,7 @@ const Invoice = ({ rows, onRowUpdate, id }) => {
                         <th>Штрих-код</th>
                         <th></th>
                     </tr>
-                    {rows.map((row, index) => {
+                    {rows && rows.map((row, index) => {
                         return <InvoiceRow 
                                 id={index+1} 
                                 row={row} 
