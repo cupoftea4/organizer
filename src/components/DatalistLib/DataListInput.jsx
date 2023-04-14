@@ -422,7 +422,7 @@ const DataListInput = ({
   ]);
 
   return (
-    <div className="datalist-input">
+    <span className="datalist-input">
       <input
         ref={inputField}
         onChange={onHandleInput}
@@ -437,7 +437,7 @@ const DataListInput = ({
         datatitle={datatitle}
       />
       {dropDown}
-    </div>
+    </span>
   );
 };
 

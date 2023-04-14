@@ -14,19 +14,16 @@ const CreateInvoice = ({ shops, updateInvoices }) => {
     <div className="green-box" >
         <select 
             onChange={e => setNewInvoice({...newInvoice, shop: e.target.value })}
-            className="create-input"
         >
             {shops && shops.map((shop, i) => <option value={shop.id} key={i}>{shop.name}</option>)}
         </select>
         <input type="date"
             value={newInvoice.date}
             onChange={e => setNewInvoice({...newInvoice, date: e.target.value })}
-            className="create-input" 
         />
         <input 
             type="text"
-            onChange={e => setNewInvoice({...newInvoice, note: e.target.value })}
-            className="create-input"  
+            onChange={e => setNewInvoice({...newInvoice, note: e.target.value })} 
             placeholder="Примітка" 
         />
         <UseAnimations

@@ -1,4 +1,140 @@
+/* Global styling */
+
 * {
+	color: inherit;
+	stroke: inherit;
+}
+
+body {
+	font-family: var(--font-family);
+}
+
+.datalist-input {
+	min-width: 10rem;
+}
+
+/* Small number type inputs */
+input[type=number] {
+	max-width: 4rem;
+}
+
+select, input[type=date] {
+	max-width: 7.5rem;
+}
+
+/* Same for tables */
+td:has(input[type=number]) {
+	max-width: 4rem;
+}
+td input[type=number] {
+	max-width: 100%;
+}
+table .datalist-input {
+	width: 100%;
+}
+
+td input {
+	border: none;
+	width: 100%;
+	background-color: inherit;
+}
+
+table th {
+	background-color: var(--primary-clr);
+	color: var(--secondary-clr);
+	font-weight: bold;
+	padding: .5rem 0;
+	font-size: 1.25rem;
+}
+
+.right-align {
+	text-align: right;
+}
+
+
+/* Utils */
+
+.clickable, button {
+	cursor: pointer;
+}
+
+.primary-button {
+	background-color: var(--dark-primary-clr);
+	color: var(--secondary-clr);
+	border: none;
+	padding: .25rem .5rem;
+	font-size: 1.25rem;
+	border-radius: .5rem;
+	text-align: center;
+	cursor: pointer;
+}
+
+.primary-button:hover {
+	background-color: var(--primary-clr);
+}
+
+.primary-button.red {
+	background-color: var(--red-400);
+}
+
+.primary-button.red:hover {
+	background-color: var(--red-600);
+}
+
+
+/* Scrollbar  */
+
+body::-webkit-scrollbar {
+	width: .75rem;
+	height: .75rem;
+}
+
+body::-webkit-scrollbar-track {
+	background: var(--gray-400);
+}
+
+body::-webkit-scrollbar-thumb {
+	background-color: var(--primary-clr) ;
+	border-radius: .5rem;
+}
+
+
+/* Max  */
+
+.center-container {
+	min-height: 10rem;
+	max-width: 30rem;
+	padding: 1rem;
+
+	border: 1px solid var(--gray-800);
+	background-color: var(--gray-400);
+	border-radius: .5rem;
+
+	display: flex;	
+	align-items: center;
+	justify-content: center;
+	gap: .5rem;
+
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 100;
+}
+
+.error {
+	border: 3px solid var(--red-600);
+}
+
+.error button {
+	background-color: var(--gray-600);
+}
+
+.error button:hover {
+	background-color: var(--gray-800);
+} 
+
+/* * {
 	font-family: var(--font-family);
 }
 
@@ -15,9 +151,7 @@ body::-webkit-scrollbar-thumb {
 	border-radius: .5rem;
 }
 
-.clickable {
-	cursor: pointer;
-}
+
 
 table {
 	border-collapse: collapse;
@@ -56,146 +190,8 @@ table .right-align {
 	text-align: right;
 }
 
-table path {
-	color: inherit;
-	stroke: inherit;
-}
 
-.primary-button {
-	background-color: var(--dark-primary-clr);
-	color: var(--secondary-clr);
-	border: none;
-	padding: .25rem .5rem;
-	font-size: 1.25rem;
-	border-radius: .5rem;
-	text-align: center;
-	cursor: pointer;
-}
 
-.primary-button:hover {
-	background-color: var(--primary-clr);
-}
 
-.red {
-	background-color: var(--red-400);
-}
 
-.red:hover {
-	background-color: var(--red-600);
-}
-
-.center-container {
-	padding: 1rem;
-	background-color: var(--gray-400);
-	border-radius: .5rem;
-	border: 1px solid var(--gray-800);
-
-	display: flex;	
-	align-items: center;
-	justify-content: center;
-	gap: .5rem;
-
-    position: fixed;
-    left: 50%;
-    top: 50%;
-	transform: translate(-50%, -50%);
-    z-index: 100;
-
-    min-height: 10rem;
-    width: 30rem;
-}
-
-.error {
-	border: 3px solid var(--red-600);
-}
-
-.error button {
-	background-color: var(--gray-600);
-}
-
-.error button:hover {
-	background-color: var(--gray-800);
-}
-
-/* * {
-	margin: 0;
-	padding: 0;
-	text-decoration: none;
-	font-family: Arial, Helvetica, sans-serif;
-  font-size: 1rem;
-}
-html {
-	--scrollbarBG: #CFD8DC;
-	--thumbBG: #04AA6D;
-}
-
-body::-webkit-scrollbar {
-	width: 15px;
-}
-
-body::-webkit-scrollbar-track {
-	background: var(--scrollbarBG);
-}
-body::-webkit-scrollbar-thumb {
-	background-color: var(--thumbBG) ;
-	border-radius: 10px;
-}
-
-table, td, tr {
-	border-collapse: collapse;
-	border: 1px solid #ddd;
-	padding: 10px;
-}
-
-table th {
-	padding-top: 12px;
-	padding-bottom: 12px;	
-	background-color: #04AA6D;
-	color: white;
-}
-  
-table input {
-	border: none;
-	background-color: rgb(250, 250, 250, 0);
-	width: 70px;
-	display: flex;
-	text-align: right;
-	font-size: 14pt;
-	
-}
-
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  scrollbar-color: var(--thumbBG) var(--scrollbarBG);
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
-.primary-button {
-  text-decoration: none;
-  background-color: #23CE8F;
-  color: #fff;
-  padding: 0.6rem 1.5rem;
-  border-radius: 1rem;
-  min-width: 8rem;
-}
-
-.primary-button:hover {
-  background-color: #1fbc7c;
-}
-
-.agree-button:hover {
-	background-color: rgb(252, 111, 111);
-}
-
-.disagree-button:hover {
-	background-color: #04AA6D;
-} */
+*/

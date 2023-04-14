@@ -59,7 +59,7 @@ const CreateInvoiceRow = ({ groups, onRowUpdate, invoiceId = 0 }) => {
             {groups && groups?.map(group => <option value={group.id} key={group.id}>{group.name}</option>)}
         </select>
         <input
-            className="create-input"
+            className="barcode"
             type="number"
             min="0"
             max="999999999999999"
@@ -82,7 +82,7 @@ const CreateInvoiceRow = ({ groups, onRowUpdate, invoiceId = 0 }) => {
             ref={barcodeFocus}
             placeholder="Штрих-код"
         />
-        <div className="name-input">
+        {/* <div className="name-input"> */}
             <GoodsDatalist
                 value={newProduct.name}
                 onSelect={product => {
@@ -93,7 +93,7 @@ const CreateInvoiceRow = ({ groups, onRowUpdate, invoiceId = 0 }) => {
                 fetchData={fetchData}
                 inputClassName="create-input" 
             />
-        </div>
+        {/* </div> */}
         {invoiceId !== 0 && <input
             className="create-input number-input"
             type="number"

@@ -1,4 +1,146 @@
+.tables {
+	max-width: 90rem;
+	margin: 0 auto;
+	padding: 2rem;
+	display: flex;
+	gap: 1rem;
+	stroke: black;
+}
+
+.tables > div {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.tables > .invoices-list {
+	flex: 1 1 0%;
+}
+
+.invoices-list tbody tr:hover, .selected-row {
+	background-color: var(--dark-primary-clr);
+	color: var(--secondary-clr);
+	stroke: var(--secondary-clr);
+} 
+
+.tables > .invoice {
+	flex: 1 1 100%;
+}
+
+.invoice tr:nth-child(even){
+	background-color: var(--gray-400);
+}
+
+.invoice table {
+	width: 100%;
+}
+
+.invoice h2 {
+	white-space: nowrap;
+}
+
+.invoice table td:not(.name, .quantity) {
+	width: 4%;
+  white-space: nowrap;
+}
+
+.invoice table td.quantity {
+	width: 1rem;
+}
+
+table tr td:first-child, td:last-child {
+	max-width: 3rem;
+	text-align: center;
+}
+
+table td {
+	padding: .25rem;
+	white-space: nowrap;
+}
+
 .green-box {
+	min-width: 100%;
+	background-color: var(--primary-clr);
+	padding: .5rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: .5rem;
+	gap: 0.5rem;
+	border-radius: .75rem;
+	flex-wrap: wrap;
+}
+
+.green-box.select-date {
+	min-width: 0;
+}
+
+.green-box .datalist-input {
+	flex: 1;
+}
+
+.green-box input, select {
+	border-radius: 0.5rem;
+	border: 3px solid var(--dark-primary-clr);
+	padding: .1rem .25rem;
+}
+
+.green-box input.barcode {
+	max-width: 8rem;
+}
+
+.contextMenu {
+	display: flex;
+  flex-direction: column;
+	border-radius: .5rem;
+	border: 2px solid var(--gray-800);
+}
+
+.contextMenu > * {
+	text-align: left;
+	padding: .5rem;
+	cursor: pointer;
+	border: none;
+	background-color: var( --gray-400);
+	border-bottom: 2px solid var(--gray-800);
+}
+
+.contextMenu > button:last-child {
+	border-radius: 0 0 .5rem .5rem;
+}
+
+.contextMenu > button:first-child {
+	border-radius: .5rem .5rem 0 0;
+}
+
+.contextMenu > button:last-child:hover {
+	background-color: var(--red-400);
+}
+
+.contextMenu > button:hover {
+	background-color: var(--dark-primary-clr);
+	color: var(--secondary-clr);
+}
+
+@media screen and (max-width: 60rem) {
+	.tables {
+		flex-direction: column;
+	}
+	.green-box {
+		min-width: 0;
+	}
+}
+
+@media screen and (max-width: 40rem) {
+	.tables {
+		padding: 1rem;
+	}
+	.tables table, h2 {
+		align-self: start;
+	}	
+}
+
+/* .green-box {
 	background-color: var(--primary-clr);
 	padding: .75rem;
 	display: flex;
@@ -6,36 +148,52 @@
 	align-items: center;
 	gap: 0.5rem;
 	border-radius: .75rem;
+	flex-wrap: wrap;
 }
 
-.create-input {
+.green-box input, select {
 	border-radius: 0.5rem;
 	border: 3px solid var(--dark-primary-clr);
 	padding: .1rem .25rem;
-	width: 8rem;
 }
 
-.number-input {
-	width: 10%;
+.green-box > input:not([type=date]), select  {
+	max-width: 6rem;
 }
 
-.name-input {
-	width: 40%;
+.green-box > input[type=number] {
+	max-width: 4rem;
+}
+
+.green-box > input[type=date] {
+	max-width: 7.5rem;
+}
+
+
+
+// Chrome, Safari, Edge, Opera 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+// Firefox 
+input[type=number] {
+  -moz-appearance: textfield;
 }
 
 table tr td:first-child, td:last-child {
 	max-width: 2rem;
 	text-align: center;
 }
-
-.invoice tr:nth-child(even){
-	background-color: var(--gray-400);
-}
-
 .tables {
 	padding: 2rem;
+	max-width: 90rem;
+	margin: 0 auto;
 	display: flex;
-	gap: 2rem;
+	flex-wrap: wrap;
+	gap: 1rem;
 }
 
 .table-div {
@@ -46,15 +204,8 @@ table tr td:first-child, td:last-child {
 }
 
 .table-div table {
-	width: 100%;
+	 width: 100%; 
 }
-
-.invoices-list tbody tr:hover, .selected-row {
-	background-color: var(--dark-primary-clr);
-	color: var(--secondary-clr);
-	stroke: var(--secondary-clr);
-	cursor: pointer;
-} 
 
 .right-top {
 	position: absolute;
@@ -63,280 +214,20 @@ table tr td:first-child, td:last-child {
 }
 
 
-@media screen and (max-width: 60rem) {
-	.tables {
-		flex-direction: column;
-	}
-}
+
 
 @media screen and (max-width: 30rem) {
 	.green-box {
 		flex-direction: column;
 
 	}
-	.green-box .create-input {
-		width: 10rem;
-		
+	.green-box > input, select {
+		max-width: 100%;
 	}
 	.table-div {
 		align-items: center;
 	}
 }
 	
-
-/*
-#invoice-table tr:nth-child(even){background-color: #f2f2f2;}
-  
-table tbody tr:hover {
-	background-color: #04cf85;
-	color: white; 
-}
-
-.selected-row {
-	background-color: #04cf85;
-	color: white;
-} 
-
-
-#tables {
-	display: flex;
-	gap: 1rem;   
-}
-
-.table-div {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
-.table-div table {
-	width: 100%;
-}
-
-.table-div.invoice {
-	position: relative;
-	top: -100px;
-	padding: 20px;
-	width: 100%;
-}
-
-button {
-	border: none;
-	padding:  10px 20px 10px 20px;
-	margin: 10px 30px 0 0px;
-	background-color: rgb(255, 255, 255);
-	border-radius: 10px;
-}
-
-#total {
-	text-align:right;
-	padding: 0 10px;
-}
-
-.dropdown {
-	max-height: 400px;
-	max-width: 900px;
-	overflow-y: auto;
-	scrollbar-color: var(--thumbBG) var(--scrollbarBG);
-	overflow-x: hidden;
-	font-size: 13pt;
-	border-radius: 5px;
-	background-color: rgb(240, 240, 240);
-	margin-right: -600px;
-}
-
-.dropdown::-webkit-scrollbar {
-	width: 15px;
-}
-  
-.dropdown::-webkit-scrollbar-track {
-	background: var(--scrollbarBG);
-}
-.dropdown::-webkit-scrollbar-thumb {
-	background-color: var(--thumbBG) ;
-	border-radius: 5px;
-}
-
-.dropdownItem {
-	padding: 10px;
-	max-width: 900px;
-	white-space: nowrap;
-	text-align: left;
-}
-
-.dropdownItem:hover{
-	background-color: rgb(199, 199, 199);
-}
-
-.confirm-container {
-	padding: 20px;
-	background-color: rgb(214, 214, 214);
-	border-radius: 10px;
-	border: 1px solid rgb(54, 54, 54);
-	display: flex;
-    position: fixed;
-	align-items: center;
-	justify-content: center;
-    left: 50%;
-    top: 50%;
-    z-index: 100;
-
-    height: 150px;
-    margin-top: -100px;
-
-    width: 500px;
-    margin-left: -300px;
-}
-
-.create-row {
-	display: block;
-	max-width: 800px;
-	width: 800px; 
-	height: 50px;
-	padding: 5px;
-	margin: 10px;
-	background-color: #23ce8f;
-	border-radius: 20px;
-}
-
-.create-row.create-invoice {
-	width: 430px;
-}
-
-.choose-input {
-	float: left;
-	background-color: #fff;
-	border: 3px solid #04AA6D;
-	border-radius: 5px;
-	height: 30px;
-	margin: 5px;
-	width: 100px;
-	padding: 0 5px 0 5px;
-} 
-
-.choose-input.select {
-	width: 90px;
-	height: 30px;
-}
-
-.choose-input.num {
-	width: 40px;
-	margin-left: 5px; 
-}
-
-.choose-input.date {
-	width: 120px;
-}
-
-.choose-input.note {
-	width: 110px;
-}
-
-.choose-input.shop {
-	width: 90px;
-}
-
-.choose-input.quantity {
-	width: 37px;
-}
-
-.choose-input.near-datalist {
-	margin-left: 20px;
-	width: 57px;
-}
-
-.inputs-div {
-	float: left;
-	margin: 5px 0 5px 5px;
-	text-align: left;
-
-}
-
-
-.name-input {
-	text-align: left;
-	width: 500px;
-	max-width: 500px;
-
-}
-
-.name-input:hover {
-	content: attr(datatitle);
-	position: absolute;
-	font-size: 20px;
-	top: -25px;
-	background: #04AA6D;
-	box-sizing: content-box;
-	width: 500px;
-	max-width: 500px;
-	padding: 5px;
-	border: 1px solid #fff;
-	color: rgb(255, 255, 255);
-  }
-
-#datalist-div {
-	margin: 5px;
-	float: left;
- 	max-width: 500px;
-	width: 280px;
-	margin: 5px 5px 5px 0;
-
-}
-
-.select-date-div {
-	display: flex;
-	justify-content: center;
-	width: 400px;
-	margin: 30px 0 0 30px;
-}
-
-.date-div {
-
-	width: 50px;
-	color: #fff;
-	width: fit-content;
-	height: 40px;
-	padding: 10px;
-	border-radius: 10px;
-	background-color: #06c27d;
-
-}
-
-.anim-btn:hover {
-	cursor: pointer;
-}
-
-.print-btn {
-	font-weight: bold;
-	border: none;
-	width: 135px;
-	padding:  10px 20px 10px 20px;
-	margin: 10px 30px 0 0px;
-	background-color: rgb(255, 255, 255);
-	border-radius: 10px;
-	background-color: #04AA6D;
-	color: #fff;
-
-}
-
-.print-btn:hover {
-	cursor: pointer;
-	background-color: #06c27d;
-}
-
-.status {
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	transform: translate(-50%, -50%);
-	width: 25rem;
-	height: 13rem;
-	background-color: rgb(216, 216, 216);
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	font-size: 2rem;
-	border-radius: .75rem;
-}	
 
  */

@@ -27,7 +27,7 @@ const InvoicesListRow = ({ invoice, shops, updateInvoice, updateInvoices, select
                 setSelectedRowId(invoice.id);
                 updateInvoice({ task: "get-table", id: invoice.id });
             }}
-            className={invoice.id === selectedRowId ? "selected-row" : ""}
+            className={`clickable ${invoice.id === selectedRowId ? "selected-row" : ""}`}
         >
             <td><b>{invoice.id}</b></td>
             <td>{invoice.date}</td>

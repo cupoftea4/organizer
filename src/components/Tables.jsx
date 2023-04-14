@@ -39,8 +39,9 @@ const Tables = () => {
 
 
     const handleRowUpdate = (changes) => {
+        console.log(changes)
         fetchData({...changes, id_nakladni: selectedInvoiceId})
-            .then(({data:invoiceRows, dataStatus}) => {
+            .then(({data: invoiceRows, dataStatus}) => {
                 setDataStatus(dataStatus);
                 if (dataStatus !== 'resolved') return;
                 setInvoiceRows(invoiceRows);
@@ -90,7 +91,7 @@ const Tables = () => {
         <>
             {dataStatus === 'resolved' ? 
                 <div className="tables">
-                    <div className='table-div'>
+                    <div className='table-div invoices-list'>
                         <SelectDate dates={dates} onYearChange={onYearChange} selectedDate={selectedDate} onMonthChange={onMonthChange}/>
                         <InvoicesList invoices={invoices} updateInvoices={handleInvoicesUpdate} onRowUpdate={handleRowUpdate} selectedInvoiceId={selectedInvoiceId} setSelectedInvoiceId={setSelectedInvoiceId} />
                     </div>

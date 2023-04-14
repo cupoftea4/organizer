@@ -9,11 +9,11 @@ TODO:
   - a component is changing a controlled input to be uncontrolled. (while getting product by barcode in "CreateProductRow")
   - fix task and name appearance in products after "CreateInvoiceRow" 
   - Fix shops state change on every "InvoicesList" component render
-  - fix null group when unexisting barcode is entered
+  - fix null group when nonexisting barcode is entered
   - fix multiple products with same id_tovar
   -css +-
   -remove github component
-  -safe creation of invice row ✔
+  -safe creation of invoice row ✔
   -fix "p." year in tears list
   -fix price on invoice row product name edit ?
   -fix deleting the last invoice in list ?
